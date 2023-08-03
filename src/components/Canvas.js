@@ -27,8 +27,9 @@ export const CanvasComponent = ({ currentModel }) => {
           <OrbitControls />
           {/* <Box position={[-1.2, 0, 0]} />
           <Box position={[1.2, 0, 0]} /> */}
+          <Model name={"/terrain/terrain.glb"} />
           <Model key={currentModel} name={currentModel} />
-          <Terrain />
+          {/* <Terrain /> */}
           <Environment path="/hdr/" files="lilienstein_2k.hdr" background blur={0.5} />
         </Canvas>
       </Suspense>

@@ -7,7 +7,7 @@ export const Row = ({ name, files, onChangeModel }) => {
   return (
     <>
       <button
-        style={{ marginTop: 50 }}
+        style={{ marginTop: 20 }}
         className="main-button"
         onClick={() => setIsOpen((isOpen) => !isOpen)}
       >
@@ -16,6 +16,7 @@ export const Row = ({ name, files, onChangeModel }) => {
       {isOpen &&
         files.map((file, index) => (
           <button
+          style={{ marginTop: 5, marginLeft: 10,  width: "80%" }}
             key={index}
             onClick={() =>
               onChangeModel(file.path.split("public/")[1] + "/" + file.name)

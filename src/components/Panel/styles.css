@@ -1,9 +1,9 @@
 .panel {
-  width: 200px;
+  width: 20%;
   background-color: #000;
   height: 100vh;
   position: fixed;
-  padding: 100px 0;
+  padding: 0px 20px;
   display: flex;
   flex-direction: column;
 }

@@ -17,11 +17,11 @@ export const Model = ({ name }) => {
     return <primitive object={obj.scene} />;
   };
 
-export const Terrain = () => {
-  const gltf = useLoader(GLTFLoader, "/terrain/terrain.glb");
-  return (
-    <>
-      <primitive object={gltf.scene} scale={0.5} />
-    </>
-  );
-};
+// export const Terrain = () => {
+//   const gltf = useLoader(GLTFLoader, "/terrain/terrain.glb");
+//   return (
+//     <>
+//       <primitive object={gltf.scene} scale={0.5} />
+//     </>
+//   );
+// };
