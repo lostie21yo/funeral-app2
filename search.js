@@ -12,7 +12,7 @@ fs.readdir(folder, (err, files) => {
           const path = name + "/" + file;
           const files = fs.readdirSync(path);
           const editedFiles = files.filter(
-            (file) => file.split(".obj").length === 2
+            (file) => file.split(".glb").length === 2
           );
 
           obj[fileName].push({ path, name: editedFiles[0] });

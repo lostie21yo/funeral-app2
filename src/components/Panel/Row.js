@@ -21,7 +21,7 @@ export const Row = ({ name, files, onChangeModel }) => {
               onChangeModel(file.path.split("public/")[1] + "/" + file.name)
             }
           >
-            {file.path}
+            {file.path.split("/").at(-1)}
           </button>
         ))}
     </>
