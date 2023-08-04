@@ -1,8 +1,9 @@
-import { useState } from "react";
+import React, {useState} from 'react';
 import "./App.css";
 import { Panel } from "./components/Panel/Panel";
-
 import { CanvasComponent } from "./components/Canvas";
+
+
 
 function App() {
   const [currentModel, setCurrentModel] = useState(
@@ -18,6 +19,6 @@ function App() {
       <CanvasComponent key={currentModel} currentModel={currentModel} />
     </>
   );
-}
+} 
 
 export default App;

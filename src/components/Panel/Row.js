@@ -3,7 +3,7 @@ import "./styles.css";
 
 export const Row = ({ name, files, onChangeModel }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  
   return (
     <>
       <button
