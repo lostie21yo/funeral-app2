@@ -14,7 +14,7 @@ export const CanvasComponent = ({ currentModel }) => {
           <directionalLight />
           <pointLight position={[10, 10, 10]} />
           <OrbitControls target={[0, 0.2, 0]} maxPolarAngle={Math.PI * 0.50} maxDistance={10} enableDamping={true}/>
-          <Model name={"/terrain/terrain.glb"} scale={0.5}/>
+          <Model key={"/terrain/terrain.glb"} name={"/terrain/terrain.glb"} scale={0.5}/>
           <Model key={currentModel} name={currentModel} />
           <Environment path="/hdr/" files="lilienstein_2k.hdr" background />
         </Canvas>

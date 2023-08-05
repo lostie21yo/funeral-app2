@@ -7,8 +7,7 @@ export const Row = ({ name, files, onChangeModel }) => {
   return (
     <div className="menu-btn-div">
       <button
-        style={{ marginTop: 20 }}
-        className="main-button"
+        className="parent-button"
         onClick={
           () => setIsOpen((isOpen) => !isOpen)
         }
@@ -19,7 +18,7 @@ export const Row = ({ name, files, onChangeModel }) => {
       {isOpen &&
         files.map((file, index) => (
           <button
-            style={{ marginTop: 5, marginLeft: 10, width: "80%" }}
+            className="children-button"
             key={index}
             onClick={() => {
               if (typeof file.name !== 'undefined') {

@@ -10,6 +10,9 @@ import { Model } from "./Model";
 
 export const ModelConstructor = ({ currentModel }) => {
 
-  return  <Model key={currentModel} name={currentModel} />; 
-  };
+  return (
+    // modelsList.map((model, ) =>)
+    < Model key = { currentModel } name = { currentModel } />
+  );
+};
 

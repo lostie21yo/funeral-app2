@@ -5,6 +5,6 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 export const Model = ({ name, scale }) => {
     const obj = useLoader(GLTFLoader, name);
-    // console.log(name, obj);
+    console.log(name, obj);
     return <primitive object={obj.scene} scale={scale}/>;
   };
