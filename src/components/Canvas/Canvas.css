@@ -1,5 +1,9 @@
 .canvas {
-    position: relative;
+    position: fixed;
+    left: 0px;
+    width: 75%;
+    height: 100%;
+    margin-left: auto;
     background-color: rgb(32, 0, 92);
 }
 

@@ -3,7 +3,7 @@ import "./Panel.css";
 
 export const Row = ({ name, files, onChangeModel }) => {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   return (
     <div className="menu-btn-div">
       <button
@@ -19,10 +19,14 @@ export const Row = ({ name, files, onChangeModel }) => {
       {isOpen &&
         files.map((file, index) => (
           <button
-          style={{ marginTop: 5, marginLeft: 10,  width: "80%" }}
+            style={{ marginTop: 5, marginLeft: 10, width: "80%" }}
             key={index}
-            onClick={() =>
-              onChangeModel(file.path.split("public/")[1] + "/" + file.name)
+            onClick={() => {
+              if (typeof file.name !== 'undefined') {
+                onChangeModel(file.path.split("public/")[1] + "/" + file.name);
+                console.log(file.path.split("public/")[1] + "/" + file.name)
+              }
+            }
             }
           >
             {file.path.split("/").at(-1)}

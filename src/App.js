@@ -15,8 +15,8 @@ function App() {
   
   return (
     <>
-      <Panel onChangeModel={handleChangeModel} />
-      <CanvasComponent key={currentModel} currentModel={currentModel} />
+      <Panel onChangeModel={handleChangeModel}/>
+      <CanvasComponent currentModel={currentModel} />
     </>
   );
 } 
