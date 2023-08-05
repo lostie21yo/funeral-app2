@@ -7,7 +7,7 @@ import { CanvasComponent } from "./components/Canvas";
 
 function App() {
   const [currentModel, setCurrentModel] = useState(
-    "/models/Ограждения/ograda-ami-muslim/ograda-ami-muslim.glb"
+    "/models/example.glb"
   );
   const handleChangeModel = (name) => {
     setCurrentModel(name);
