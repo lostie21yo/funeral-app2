@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles.css";
+import "./Panel.css";
 import json from "../../assets/models.json";
 import { Row } from "./Row";
 

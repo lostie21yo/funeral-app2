@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import "./styles.css";
+import "./Panel.css";
 
 export const Row = ({ name, files, onChangeModel }) => {
   const [isOpen, setIsOpen] = useState(false);
   
   return (
-    <>
+    <div className="menu-btn-div">
       <button
         style={{ marginTop: 20 }}
         className="main-button"
-        onClick={() => setIsOpen((isOpen) => !isOpen)}
+        onClick={
+          () => setIsOpen((isOpen) => !isOpen)
+        }
       >
         {name}
       </button>
+
       {isOpen &&
         files.map((file, index) => (
           <button
@@ -25,6 +28,6 @@ export const Row = ({ name, files, onChangeModel }) => {
             {file.path.split("/").at(-1)}
           </button>
         ))}
-    </>
+    </div>
   );
 };

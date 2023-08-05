@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import "./App.css";
 import { Panel } from "./components/Panel/Panel";
-import { CanvasComponent } from "./components/Canvas";
+import { CanvasComponent } from "./components/Canvas/Canvas";
 
 
 

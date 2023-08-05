@@ -1,9 +1,15 @@
 .panel {
   width: 20%;
-  background-color: #000;
+  background-color: #13002c;
   height: 100vh;
   position: fixed;
   padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-btn-div {
+  margin: 5% 10%;
   display: flex;
   flex-direction: column;
 }
