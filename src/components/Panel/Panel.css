@@ -1,5 +1,5 @@
 .panel {
-  width: 25%;
+  width: 35%;
   right: 0px;
   background-color: #13002c;
   height: 100vh;
@@ -22,5 +22,5 @@
 .children-button {
   margin-top: 5px;
   margin-left: 10px;
-  width: 80%
+  width: 60%
 }

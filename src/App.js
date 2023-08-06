@@ -6,17 +6,32 @@ import { CanvasComponent } from "./components/Canvas/Canvas";
 
 
 function App() {
-  const [currentModel, setCurrentModel] = useState(
-    "/models/example.glb"
-  );
+  
+  const [currentModel, setCurrentModel] = useState("/models/example.glb");
+  
   const handleChangeModel = (name) => {
     setCurrentModel(name);
   };
+
+  const [modelList, setModelList] = useState({}); // "-1": "/models/example.glb"
+
+  
+  const addModelToList = (index, path) => {
+    modelList[index] = path;
+    setModelList(modelList);
+  };
+
+  // const deleteModelFromList = (index, path) => {
+  //   modelList.classIndex = -1;
+  //   modelList.modelPath = '';
+  //   setModelList(modelList);
+  // };
+  
   
   return (
     <>
-      <Panel onChangeModel={handleChangeModel}/>
-      <CanvasComponent currentModel={currentModel} />
+      <Panel onChangeModel={handleChangeModel} onAddModelToList={addModelToList}/>
+      <CanvasComponent currentModel={currentModel} modelList={modelList} />
     </>
   );
 } 

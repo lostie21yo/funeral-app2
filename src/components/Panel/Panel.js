@@ -5,7 +5,9 @@ import { Row } from "./Row";
 
 const MODELS = json;
 
-export const Panel = ({ onChangeModel }) => {
+export const Panel = ({ onChangeModel, onAddModelToList }) => {
+  // console.log(MODELS)
+  // console.log(Object.keys(MODELS))
   return (
     <div className={"panel"}>
       {Object.keys(MODELS).map((model, index) => (
@@ -14,6 +16,8 @@ export const Panel = ({ onChangeModel }) => {
           key={index}
           files={MODELS[model]}
           onChangeModel={onChangeModel}
+          onAddModelToList = {onAddModelToList}
+          classIndex = {index}
         />
       ))}
     </div>
