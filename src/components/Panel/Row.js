@@ -1,26 +1,30 @@
 import React, { useState } from "react";
 import "./Panel.css";
-import { Button } from 'react-bootstrap';
+import { Button, Badge } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export const Row = ({ name, files, onChangeModel, classIndex, onAddModelToList }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  // const pngsrc = `/Models/placeholder.png`
+  const pngsrc = `/Models/${name.toString()}/${name.toString()}.png`
+
 
   return (
-    <div className="menu-btn-div">
-      <button
-        className="parent-button"
-        onClick={() => { setIsOpen((isOpen) => !isOpen) }
-        }
-      >
-        {name}
-      </button>
+    <div className="menu-btn-div" >
+
+      <div className="btn-image-container" onClick={() => { setIsOpen((isOpen) => !isOpen) }}>
+        <img className="btn-image" alt='' src={pngsrc} />
+        <span className="btn-image-text-position">{name}</span>
+      </div>
 
       {isOpen &&
         files.map((file, index) => (
-          <div>
-            <button
-              className="children-button"
+          <div >
+            <Button
+              // className="children-button"
+              variant="secondary" size="sm" className="children-button"
               key={file.id}
               onClick={() => {
                 if (typeof file.name !== 'undefined') {
@@ -32,13 +36,14 @@ export const Row = ({ name, files, onChangeModel, classIndex, onAddModelToList }
               }
             >
               {file.path.split("/").at(-1)}
-            </button>
-            <span
+            </Button>
+            <Badge bg="success">Price</Badge>
+            {/* <span
               key={file}
               style={{color: "white"}}
             >
               Price
-            </span>
+            </span> */}
           </div>
         ))}
     </div>

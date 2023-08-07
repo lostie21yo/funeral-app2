@@ -4,7 +4,6 @@ import { Panel } from "./components/Panel/Panel";
 import { CanvasComponent } from "./components/Canvas/Canvas";
 
 
-
 function App() {
   
   const [currentModel, setCurrentModel] = useState("/models/example.glb");
