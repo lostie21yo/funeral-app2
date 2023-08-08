@@ -21,15 +21,15 @@ export const Row = ({ name, files, onChangeModel, classIndex, onAddModelToList }
 
       {isOpen &&
         files.map((file, index) => (
-          <div >
+          <div key={index}>
             <Button
               // className="children-button"
               variant="secondary" size="sm" className="children-button"
-              key={file.id}
+              key={index}
               onClick={() => {
                 if (typeof file.name !== 'undefined') {
                   onChangeModel(file.path.split("public/")[1] + "/" + file.name);
-                  console.log(file.path.split("public/")[1] + "/" + file.name)
+                  // console.log(file.path.split("public/")[1] + "/" + file.name)
                   onAddModelToList(classIndex, file.path.split("public/")[1] + "/" + file.name)
                 }
               }
