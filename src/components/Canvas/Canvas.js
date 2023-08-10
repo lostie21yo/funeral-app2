@@ -5,6 +5,7 @@ import { OrbitControls, Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { ModelConstructor } from "./ModelConstructor";
 import { Terrain } from "./Terrain";
+import Spinner from 'react-bootstrap/Spinner';
 
 
 export const CanvasComponent = ({ currentModel, modelList }) => {
@@ -12,7 +13,7 @@ export const CanvasComponent = ({ currentModel, modelList }) => {
 
   return (
     <div className={"canvas"}>
-      <Suspense fallback={<div className={"fallback"}>loading...</div>}>
+      <Suspense fallback={<div className={"fallback"}><Spinner animation="border" variant="light"/> Loading...</div>}> 
         <Canvas shadows 
           onCreated={() => console.log("Canvas rendered")}
           camera={{ fov: 75, position: [2.5, 1.3, -1.25] }}>

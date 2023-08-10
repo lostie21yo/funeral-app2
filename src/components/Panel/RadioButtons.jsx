@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
-import { useAccordionButton } from 'react-bootstrap/AccordionButton';
-import { Button } from 'react-bootstrap';
-
+import "./Panel.css";
 
 export const RadioButtons = ({ files, onChangeModel, classIndex, onAddModelToList }) => {
     const [radioValue, setRadioValue] = useState(0);
@@ -12,7 +10,9 @@ export const RadioButtons = ({ files, onChangeModel, classIndex, onAddModelToLis
         <ButtonGroup vertical={true}>
             {files.map((file, index) => (
                 <ToggleButton
-                    // className="mb-2"
+
+                    // style={{ width: "60%" }}
+                    className="mb-1"
                     key={index}
                     id={`radio-${index}`}
                     type="radio"

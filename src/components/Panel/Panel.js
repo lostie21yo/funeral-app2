@@ -1,8 +1,9 @@
 import React from "react";
 import "./Panel.css";
-import { Menu } from "./Menu";
 import { Header } from "./Header";
 import { CustomAccordion } from "./CustomAccordion";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 export const Panel = ({ onChangeModel, onAddModelToList, onDeleteModelFromList }) => {
@@ -11,14 +12,12 @@ export const Panel = ({ onChangeModel, onAddModelToList, onDeleteModelFromList }
   return (
     <div className={"panel"}>
       <Header />
-      <CustomAccordion
-        onChangeModel={onChangeModel}
-        onAddModelToList={onAddModelToList}
-        onDeleteModelFromList={onDeleteModelFromList} />
-      {/* <Menu
-        onChangeModel={onChangeModel}
-        onAddModelToList={onAddModelToList}
-        onDeleteModelFromList={onDeleteModelFromList} /> */}
+      <div className="scrollbar scrollbar-primary" style={{border: '', height: '80%'}}>
+        <CustomAccordion
+          onChangeModel={onChangeModel}
+          onAddModelToList={onAddModelToList}
+          onDeleteModelFromList={onDeleteModelFromList} />
+      </div>
     </div>
   );
 };
