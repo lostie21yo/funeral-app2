@@ -10,7 +10,6 @@ export const Row = ({ name, files, onChangeModel, classIndex, onAddModelToList }
   // const pngsrc = `/Models/placeholder.png`
   const pngsrc = `/Models/${name.toString()}/${name.toString()}.png`
 
-
   return (
     <div className="menu-btn-div" >
 
@@ -21,7 +20,7 @@ export const Row = ({ name, files, onChangeModel, classIndex, onAddModelToList }
 
       {isOpen &&
         files.map((file, index) => (
-          <div key={index}>
+          <div key={index} >
             <Button
               // className="children-button"
               variant="secondary" size="sm" className="children-button"
@@ -29,8 +28,7 @@ export const Row = ({ name, files, onChangeModel, classIndex, onAddModelToList }
               onClick={() => {
                 if (typeof file.name !== 'undefined') {
                   onChangeModel(file.path.split("public/")[1] + "/" + file.name);
-                  // console.log(file.path.split("public/")[1] + "/" + file.name)
-                  onAddModelToList(classIndex, file.path.split("public/")[1] + "/" + file.name)
+                  onAddModelToList(classIndex, file.path.split("public/")[1] + "/" + file.name);
                 }
               }
               }

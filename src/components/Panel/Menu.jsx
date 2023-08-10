@@ -5,7 +5,7 @@ import { Row } from "./Row";
 
 const MODELS = json;
 
-export const Menu = ({ onChangeModel, onAddModelToList }) => {
+export const Menu = ({ onChangeModel, onAddModelToList, onDeleteModelFromList }) => {
   // console.log(MODELS)
   // console.log(Object.keys(MODELS))
   return (
@@ -16,8 +16,9 @@ export const Menu = ({ onChangeModel, onAddModelToList }) => {
           key={index}
           files={MODELS[model]}
           onChangeModel={onChangeModel}
-          onAddModelToList = {onAddModelToList}
-          classIndex = {index}
+          onAddModelToList={onAddModelToList}
+          onDeleteModelFromList={onDeleteModelFromList}
+          classIndex={index}
         />
       ))}
     </div>

@@ -1,13 +1,14 @@
 import { useLoader } from "@react-three/fiber";
-
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Model } from "./Model";
-import { useState } from "react";
 import MODELS from "../../assets/models.json";
 
+const Model = ({ name, scale, isVisible }) => {
 
-// var model1 = <Model key={currentModel} name={currentModel} />
+  const obj = useLoader(GLTFLoader, name);
+  obj.castShadow = true
+  return isVisible ? <primitive object={obj.scene} scale={scale} castShadow receiveShadow/> : null;
+};
+
 
 export const ModelConstructor = ({ modelList }) => {
 
