@@ -12,23 +12,24 @@ function App() {
   };
 
   const [modelList, setModelList] = useState({}); // "-1": "/models/example.glb"
+  // const addModelToList = (index, path) => {
+  //   if (index in modelList & modelList[index] === path) {
+  //     delete modelList[index];
+  //     console.log('deleted', Object.keys(modelList), Object.values(modelList))
+  //   }
+  //   else {
+  //     modelList[index] = path;
+  //     console.log('added', Object.keys(modelList), Object.values(modelList))
+  //   }
+  //   setModelList(modelList);
+  // };
+
   const addModelToList = (index, path) => {
-    if (index in modelList & modelList[index] === path) {
-      delete modelList[index];
-      console.log('deleted', Object.keys(modelList), Object.values(modelList))
-    }
-    else {
       modelList[index] = path;
       console.log('added', Object.keys(modelList), Object.values(modelList))
-    }
     setModelList(modelList);
   };
 
-  // useEffect(() => {
-  //   setModelList(modelList);
-  //   setCurrentModel(name);
-  //   console.log('effected')
-  // }, [currentModel, modelList])
 
 
   return (

@@ -35,13 +35,6 @@ export const Row = ({ name, files, onChangeModel, classIndex, onAddModelToList }
             >
               {file.path.split("/").at(-1)}
             </Button>
-            <Badge bg="success">Price</Badge>
-            {/* <span
-              key={file}
-              style={{color: "white"}}
-            >
-              Price
-            </span> */}
           </div>
         ))}
     </div>

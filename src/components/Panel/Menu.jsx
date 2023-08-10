@@ -1,9 +1,8 @@
 import React from "react";
 import "./Panel.css";
-import json from "../../assets/models.json";
+import MODELS from "../../assets/models.json";
 import { Row } from "./Row";
 
-const MODELS = json;
 
 export const Menu = ({ onChangeModel, onAddModelToList, onDeleteModelFromList }) => {
   // console.log(MODELS)
