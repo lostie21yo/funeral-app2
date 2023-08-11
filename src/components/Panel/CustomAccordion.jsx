@@ -11,7 +11,7 @@ export const CustomAccordion = ({ onChangeModel, onAddModelToList, onDeleteModel
     return (
         <Accordion defaultActiveKey={null}>
             {Object.keys(MODELS).map((model, index) => (
-                <Card key={index} style={{border: ""}}>
+                <Card key={index} className='me-1'>
 
                     <Card.Title >
                         <PrimaryButton name={model} eventKey={index}>
