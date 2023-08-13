@@ -9,7 +9,7 @@ export const PrimaryButton = ({ name, eventKey }) => {
     return (
         <div onClick={decoratedOnClick} className='btn-image-container'>
 
-            <img src={`/Models/${name.toString()}/${name.toString()}.png`} alt="Кнопка «button»" className='btn-image'></img>
+            <img src={`/Models/${name.toString()}/${name.toString()}.png`} alt="button" className='btn-image'></img>
             <span className="btn-image-text-position">{name}</span>
         </div>
     );

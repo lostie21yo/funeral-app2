@@ -3,36 +3,38 @@ import { ButtonGroup, ToggleButton, Badge, Container } from "react-bootstrap";
 import "./Panel.css";
 
 
-export const RadioButtons = ({ files, onChangeModel, classIndex, onAddModelToList }) => {
+export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddModelToList }) => {
     const [radioValue, setRadioValue] = useState(0);
 
-    const emptyModel = "public/models/unselected.glb"
+    const emptyModel = `public/models/${name}/unselected.glb`
 
     return (
         <ButtonGroup vertical={true} className='radio-btn-group'>
+
             <Container key={emptyModel} className='toggle-btn-container'>
-                    <ToggleButton
-                        style={{ width: "70%" }}
-                        className="mb-1"
-                        key={emptyModel}
-                        id={`radio-${emptyModel}`}
-                        type="radio"
-                        variant='outline-light'
-                        name="radio"
-                        value={emptyModel.name}
-                        checked={radioValue === emptyModel.name}
-                        onChange={(e) => setRadioValue(e.currentTarget.value)}
-                        onClick={() => {
-                            if (typeof emptyModel !== 'undefined') {
-                                onChangeModel(emptyModel);
-                                onAddModelToList(classIndex, emptyModel);
-                            }
+                <ToggleButton
+                    style={{ width: "70%" }}
+                    className="mb-1"
+                    key={emptyModel + classIndex}
+                    id={`radio-${emptyModel}`}
+                    type="radio"
+                    variant='outline-light'
+                    name="radio"
+                    value={emptyModel.name}
+                    checked={radioValue === emptyModel.name}
+                    onChange={(e) => setRadioValue(e.currentTarget.value)}
+                    onClick={() => {
+                        if (typeof emptyModel !== 'undefined') {
+                            onChangeModel(emptyModel);
+                            onAddModelToList(classIndex, emptyModel);
                         }
-                        }
-                    >
-                        Не выбрано
-                    </ToggleButton>
-                </Container>
+                    }
+                    }
+                >
+                    Не выбрано
+                </ToggleButton>
+            </Container>
+
             {files.map((file, index) => (
                 <Container key={index} className='toggle-btn-container'>
                     <ToggleButton

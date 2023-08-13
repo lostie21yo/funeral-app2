@@ -6,7 +6,7 @@ import { CanvasComponent } from "./components/Canvas/Canvas";
 
 function App() {
 
-  const [currentModel, setCurrentModel] = useState("/models/example.glb");
+  const [currentModel, setCurrentModel] = useState();
   const handleChangeModel = (name) => {
     setCurrentModel(name);
   };

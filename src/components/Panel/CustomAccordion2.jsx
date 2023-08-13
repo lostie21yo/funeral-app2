@@ -17,6 +17,7 @@ export const CustomAccordion2 = ({ onChangeModel, onAddModelToList }) => {
                         </PrimaryButton>
                     <Accordion.Body key={index} style={{padding: "12px 16px "}}>
                         <RadioButtons
+                            name={model}
                             key={index + MODELS[model]}
                             classIndex={index}
                             files={MODELS[model]}
