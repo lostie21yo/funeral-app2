@@ -2,16 +2,41 @@ import { useState } from 'react';
 import { ButtonGroup, ToggleButton, Badge, Container } from "react-bootstrap";
 import "./Panel.css";
 
+
 export const RadioButtons = ({ files, onChangeModel, classIndex, onAddModelToList }) => {
     const [radioValue, setRadioValue] = useState(0);
 
-    return (
-        <ButtonGroup vertical={true}>
-            {files.map((file, index) => (
-                <Container className=''>
-                    <ToggleButton
+    const emptyModel = "public/models/unselected.glb"
 
-                        // style={{ width: "60%" }}
+    return (
+        <ButtonGroup vertical={true} className='radio-btn-group'>
+            <Container key={emptyModel} className='toggle-btn-container'>
+                    <ToggleButton
+                        style={{ width: "70%" }}
+                        className="mb-1"
+                        key={emptyModel}
+                        id={`radio-${emptyModel}`}
+                        type="radio"
+                        variant='outline-light'
+                        name="radio"
+                        value={emptyModel.name}
+                        checked={radioValue === emptyModel.name}
+                        onChange={(e) => setRadioValue(e.currentTarget.value)}
+                        onClick={() => {
+                            if (typeof emptyModel !== 'undefined') {
+                                onChangeModel(emptyModel);
+                                onAddModelToList(classIndex, emptyModel);
+                            }
+                        }
+                        }
+                    >
+                        Не выбрано
+                    </ToggleButton>
+                </Container>
+            {files.map((file, index) => (
+                <Container key={index} className='toggle-btn-container'>
+                    <ToggleButton
+                        style={{ width: "70%" }}
                         className="mb-1"
                         key={index}
                         id={`radio-${index}`}
@@ -31,7 +56,7 @@ export const RadioButtons = ({ files, onChangeModel, classIndex, onAddModelToLis
                     >
                         {file.path.split("/").at(-1)}
                     </ToggleButton>
-                    <Badge bg="success" className='custom-badge'>Price</Badge>
+                    <Badge pill bg="info" className='custom-badge'>Price</Badge>
                 </Container>
             ))}
 

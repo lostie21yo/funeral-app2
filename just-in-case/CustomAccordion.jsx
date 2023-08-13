@@ -6,7 +6,7 @@ import { RadioButtons } from './RadioButtons';
 import "./Panel.css";
 
 
-export const CustomAccordion = ({ onChangeModel, onAddModelToList, onDeleteModelFromList }) => {
+export const CustomAccordion = ({ onChangeModel, onAddModelToList }) => {
 
     return (
         <Accordion defaultActiveKey={null}>
