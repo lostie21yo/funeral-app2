@@ -4,6 +4,7 @@ import { Header } from "./Header";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Footer } from "./Footer";
 import { CustomAccordion2 } from "./CustomAccordion2";
+import Filter from "./Filter";
 
 
 
@@ -13,6 +14,7 @@ export const Panel = ({ onChangeModel, onAddModelToList, onDeleteModelFromList }
   return (
     <div className={"panel"}>
       <Header />
+      <Filter/>
       <div className="scrollbar scrollbar-primary">
           <CustomAccordion2
             onChangeModel={onChangeModel}

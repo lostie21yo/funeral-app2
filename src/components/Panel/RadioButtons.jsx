@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ButtonGroup, ToggleButton, Badge, Container } from "react-bootstrap";
+import { ButtonGroup, ToggleButton, Badge, Container, ToggleButtonGroup, ButtonToolbar } from "react-bootstrap";
 import "./Panel.css";
 
 
@@ -9,6 +9,14 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
     const emptyModel = `public/models/${name}/unselected.glb`
 
     return (
+        //         <ButtonToolbar> 
+        //         <ToggleButtonGroup vertical={true}type="radio" name="options" defaultValue={1}>
+        //             <ToggleButton value={1}>Radio 1 (pre-checked)</ToggleButton>
+        //             <ToggleButton value={2}>Radio 2</ToggleButton>
+        //             <ToggleButton value={3}>Radio 3</ToggleButton>
+        //         </ToggleButtonGroup>
+        //   </ButtonToolbar >
+
         <ButtonGroup vertical={true} className='radio-btn-group'>
 
             <Container key={emptyModel} className='toggle-btn-container'>
@@ -44,7 +52,7 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
                         id={`radio-${index}`}
                         type="radio"
                         variant='outline-success'
-                        name="radio"
+                        name={`radio+${index}`}
                         value={file.name}
                         checked={radioValue === file.name}
                         onChange={(e) => setRadioValue(e.currentTarget.value)}
