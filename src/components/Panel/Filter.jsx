@@ -1,28 +1,29 @@
 import { useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { ButtonToolbar, Container, ToggleButtonGroup } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
-const FilterRadioButtons = ({ list, setting, doSet, variant}) => {
+const FilterRadioButtons = ({ list, setting, doSet, variant, def }) => {
     return (
-        <Container key={variant}>
+        <ToggleButtonGroup name={`${setting}-toggle`} type='radio' defaultValue={def} className='filter-button-group'>
+        {/* <Container key={variant}> */}
             {list.map((radio, idx) => (
                 <ToggleButton
                     key={`${variant}-${idx}`}
                     id={`${variant}-${idx}`}
                     type="radio"
+                    // size='sm'
                     variant={variant}
                     name={`radio+${idx}`}
                     value={radio.value}
                     checked={setting === radio.value}
-                    onChange={(e) => {doSet(e.currentTarget.value); console.log(radio, idx) }}
-                
-
+                    onChange={(e) => { doSet(e.currentTarget.value); console.log(radio, idx) }}
                 >
                     {radio.name}
                 </ToggleButton>
             ))}
-        </Container>
+        {/* </Container> */}
+        </ToggleButtonGroup>
     )
 }
 
@@ -50,11 +51,11 @@ function Filter() {
     ];
 
     return (
-        <Container>
-            <FilterRadioButtons key={materials} list={materials} setting={material} doSet={setMaterial} variant={'outline-danger'} />
-            <FilterRadioButtons key={sizes} list={sizes} setting={size} doSet={setSize} variant={'outline-primary'}/>
-            <FilterRadioButtons key={types} list={types} setting={type} doSet={setType} variant={'outline-warning'}/>
-        </Container>
+            <Container className='filter'>
+                <FilterRadioButtons key={materials} list={materials} setting={material} doSet={setMaterial} variant={'outline-danger'} def={'m1'}/>
+                <FilterRadioButtons key={sizes} list={sizes} setting={size} doSet={setSize} variant={'outline-primary'} def={'s1'}/>
+                <FilterRadioButtons key={types} list={types} setting={type} doSet={setType} variant={'outline-warning'} def={'t1'}/>
+            </Container>
     );
 }
 

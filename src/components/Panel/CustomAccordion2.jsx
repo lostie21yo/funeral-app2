@@ -29,6 +29,3 @@ export const CustomAccordion2 = ({ onChangeModel, onAddModelToList }) => {
         </Accordion>
     );
 }
-
-// https://react-bootstrap.netlify.app/docs/components/buttons/
-// https://react-bootstrap.netlify.app/docs/components/accordion

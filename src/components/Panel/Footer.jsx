@@ -10,8 +10,5 @@ export const Footer = () => {
                 <Button variant="success" className="footer-button">Оформить заказ</Button>
             </Container>
         </Container>
-        // <div className="footer" >
-        //     <Button variant="success" className="footer-button">Оформить заказ</Button>
-        // </div>
     );
 };

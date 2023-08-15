@@ -2,22 +2,42 @@
   width: 35%;
   right: 0px;
   background-color: #212529;
-  height: 100vh;
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 /* HEADER */
+
+/* FILTER */
+.filter {
+  /* border: 1px solid yellow; */
+  padding: 6px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  align-content: stretch;
+  flex-wrap: wrap
+}
+
+.filter-button-group {
+  margin: 6px;
+}
 
 /* MENU */
 
 .scrollbar {
   overflow-y: scroll;
   height: 60%;
+  flex: 1 0 auto;
+  flex-wrap: wrap;
   border: 8px solid #212529;
 }
 
 .scrollbar-primary {
   scrollbar-color: #40474e #f5f5f5;
+  flex: 1 0 auto;
 }
 
 .scrollbar-primary::-webkit-scrollbar {
@@ -68,31 +88,41 @@
   position: relative;
 }
 
+.toggle-btn {
+  width: 70%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  align-content: stretch;
+  flex-wrap: wrap;
+}
+
 /* radio buttons */
 .custom-badge {
-  margin: auto;
+  margin: auto; 
 }
 
 
 /* FOOTER */
 .footer {
-  width: 35%;
+  /* width: 35%; */
   height: 70px;
+  flex: 0 0 auto;
   /* border: 1px solid red;  */
-  justify-content: center;
-  vertical-align: middle;
-  display: flex;
-  flex-wrap: wrap;
-  position: fixed;
+  /* justify-content: center; */
+  /* vertical-align: middle; */
+  /* flex-wrap: wrap; */
+  /* position: absolute; */
   bottom: 0px;
+
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid blue;
 }
 
 .footer-button {
   --bs-border-radius: 2rem;
   width: 60%;
   height: 45px;
-}
-
-.hr {
-  margin: 0.3rem 0rem 0.1rem 0rem;
 }

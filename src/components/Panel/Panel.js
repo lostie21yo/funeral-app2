@@ -21,7 +21,6 @@ export const Panel = ({ onChangeModel, onAddModelToList, onDeleteModelFromList }
             onAddModelToList={onAddModelToList}
             onDeleteModelFromList={onDeleteModelFromList} />
       </div>
-      <hr className="hr"/>
       <Footer/>
     </div>
   );
