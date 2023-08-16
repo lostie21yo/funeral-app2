@@ -3,7 +3,7 @@ import "./Panel.css";
 
 export const PrimaryButton = ({ name, eventKey }) => {
     const decoratedOnClick = useAccordionButton(eventKey, () =>
-        console.log('totally custom!'),
+        null
     );
 
     return (

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ButtonGroup, ToggleButton, Badge, Container, ToggleButtonGroup, ButtonToolbar } from "react-bootstrap";
+import { ToggleButton, Badge, ToggleButtonGroup } from "react-bootstrap";
 import "./Panel.css";
 
 
@@ -12,9 +12,8 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
     return (
 
         <ToggleButtonGroup vertical={true} className='radio-btn-group' name={`${classIndex}-toggle`} type='radio' defaultValue={emptyModel}>
-            {/* <Container key={emptyModel} className='toggle-btn-container'> */}
             <ToggleButton
-                style={{ width: "70%" }}
+                style={{ width: "100%" }} 
                 className="mb-1"
                 key={emptyModel + classIndex}
                 id={`radio-${emptyModel}`}
@@ -32,12 +31,10 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
             >
                 Не выбрано
             </ToggleButton>
-            {/* </Container> */}
 
             {files.map((file, index) => (
-                // <Container key={index} className='toggle-btn-container'>
                 <ToggleButton
-                    style={{ width: "70%", display: "flex", justifyContent: "space-between" }}
+                    style={{ width: "100%", display: "flex", justifyContent: "space-between" }}
                     className="mb-1"
                     key={index}
                     id={`radio-${index}`}
@@ -53,11 +50,10 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
                     }
                     }
                 >
-                    {file.path.split("/").at(-1)}
-                    <Badge pill bg="info" className=''>Price</Badge>
+                    {file.name.split('[')[0]}
+                    <Badge pill bg="info">Price</Badge>
 
                 </ToggleButton>
-                // </Container> 
             ))}
         </ToggleButtonGroup>
     );

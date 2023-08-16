@@ -15,7 +15,7 @@ function App() {
 
   const addModelToList = (index, path) => {
       modelList[index] = path;
-      console.log('added', Object.keys(modelList), Object.values(modelList))
+      // console.log('added', Object.keys(modelList), Object.values(modelList))
     setModelList(modelList);
   };
 

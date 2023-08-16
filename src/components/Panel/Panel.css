@@ -16,13 +16,19 @@
   padding: 6px;
   justify-content: center;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   align-content: stretch;
-  flex-wrap: wrap
+  /* flex-wrap: wrap */
 }
 
 .filter-button-group {
-  margin: 6px;
+  margin: 0px;
+  justify-content: space-evenly;
+  display: flex;
+  align-content: stretch;
+  align-items: stretch;
+  flex-direction: column;
+
 }
 
 /* MENU */
@@ -32,7 +38,7 @@
   height: 60%;
   flex: 1 0 auto;
   flex-wrap: wrap;
-  border: 8px solid #212529;
+  border: 4px solid #212529;
 }
 
 .scrollbar-primary {
@@ -44,6 +50,7 @@
   width: 8px;
   background-color: #292e33;
   border-radius: 10px;
+  margin: 50px;
 }
 
 .scrollbar-primary::-webkit-scrollbar-thumb {
@@ -80,26 +87,13 @@
   position: fixed;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .toggle-btn-container {
   /* justify-content: center; */
   display: flex;
   position: relative;
-}
-
-.toggle-btn {
-  width: 70%;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  align-content: stretch;
-  flex-wrap: wrap;
-}
-
-/* radio buttons */
-.custom-badge {
-  margin: auto; 
 }
 
 

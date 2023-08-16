@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import { ButtonToolbar, Container, ToggleButtonGroup } from 'react-bootstrap';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import { Container, ToggleButtonGroup } from 'react-bootstrap';
 import ToggleButton from 'react-bootstrap/ToggleButton';
+import { CustomAccordion } from './CustomAccordion';
 
 const FilterRadioButtons = ({ list, setting, doSet, variant, def }) => {
     return (
-        <ToggleButtonGroup name={`${setting}-toggle`} type='radio' defaultValue={def} className='filter-button-group'>
-        {/* <Container key={variant}> */}
+        <ToggleButtonGroup vertical={true} name={`${setting}-toggle`}
+            type='radio' defaultValue={def} >
             {list.map((radio, idx) => (
                 <ToggleButton
+                    style={{ padding: "3px 6px " }}
                     key={`${variant}-${idx}`}
                     id={`${variant}-${idx}`}
                     type="radio"
-                    // size='sm'
                     variant={variant}
                     name={`radio+${idx}`}
                     value={radio.value}
@@ -22,40 +22,66 @@ const FilterRadioButtons = ({ list, setting, doSet, variant, def }) => {
                     {radio.name}
                 </ToggleButton>
             ))}
-        {/* </Container> */}
         </ToggleButtonGroup>
     )
 }
 
-function Filter() {
-    const [material, setMaterial] = useState('m1');
-    const [size, setSize] = useState('s1');
-    const [type, setType] = useState('t1');
+function Filter({ onChangeModel, onAddModelToList }) {
+    const [material, setMaterial] = useState('granite');
+    const [size, setSize] = useState('100');
+    const [type, setType] = useState('standard');
 
     const materials = [
-        { name: 'Гранит', value: 'm1' },
-        { name: 'Мрамор', value: 'm2' },
+        { name: 'Гранит', value: 'granite' },
+        { name: 'Мрамор', value: 'marble' },
     ];
     const sizes = [
-        { name: '70', value: 's1' },
-        { name: '80', value: 's2' },
-        { name: '90', value: 's3' },
-        { name: '100', value: 's4' },
-        { name: '120', value: 's5' },
-        { name: 'Семейный', value: 's6' },
+        { name: '70 см', value: '70' },
+        { name: '80 см', value: '80' },
+        { name: '90 см', value: '90' },
+        { name: '100 см', value: '100' },
+        { name: '120 см', value: '120' },
+        { name: 'Семейный', value: 'family' },
     ];
     const types = [
-        { name: 'Стандарт', value: 't1' },
-        { name: 'Православные', value: 't2' },
-        { name: 'Мусульманские', value: 't3' },
+        { name: 'Стандарт', value: 'standard' },
+        { name: 'Православные', value: 'orthodox' },
+        { name: 'Мусульманские', value: 'muslim' },
     ];
 
     return (
-            <Container className='filter'>
-                <FilterRadioButtons key={materials} list={materials} setting={material} doSet={setMaterial} variant={'outline-danger'} def={'m1'}/>
-                <FilterRadioButtons key={sizes} list={sizes} setting={size} doSet={setSize} variant={'outline-primary'} def={'s1'}/>
-                <FilterRadioButtons key={types} list={types} setting={type} doSet={setType} variant={'outline-warning'} def={'t1'}/>
+        <div className="scrollbar scrollbar-primary" >
+
+            <Container className='filter' style={{ padding: '0px 6px 6px 6px' }}>
+                <Container className='filter-button-group' style={{ padding: '0px 6px 6px 6px' }}>
+                    <Container style={{ padding: '0' }} className='filter-button-group'>
+                        <p style={{ margin: '0px 0px 4px 0px' }}>Материал</p>
+                        <FilterRadioButtons key={materials} list={materials}
+                            setting={material} doSet={setMaterial}
+                            variant={'outline-danger'} def={material} />
+                    </Container>
+                    <Container style={{ padding: '0' }} className='filter-button-group'>
+                        <p style={{ margin: '0px 0px 4px 0px' }}>Тип</p>
+                        <FilterRadioButtons key={types} list={types}
+                            setting={type} doSet={setType}
+                            variant={'outline-warning'} def={type} />
+                    </Container>
+                </Container>
+                <Container className='filter-button-group' style={{ padding: '0px 6px 6px 6px' }}>
+                    <p style={{ margin: '0px 0px 4px 0px' }}>Размер</p>
+                    <FilterRadioButtons key={sizes} list={sizes}
+                        setting={size} doSet={setSize}
+                        variant={'outline-primary'} def={size} />
+                </Container>
             </Container>
+            <CustomAccordion
+                material={material}
+                key={material + size + type}
+                size={size}
+                type={type}
+                onChangeModel={onChangeModel}
+                onAddModelToList={onAddModelToList} />
+        </div>
     );
 }
 

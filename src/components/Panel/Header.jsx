@@ -6,7 +6,7 @@ export const Header = () => {
 
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark">
+            <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark" style={{backgroundColor: "#1c2128"}}>
                 <Container>
                     <Navbar.Brand  >
                         <img
