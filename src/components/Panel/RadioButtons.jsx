@@ -6,15 +6,14 @@ import "./Panel.css";
 export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddModelToList }) => {
     const [radioValue, setRadioValue] = useState('');
 
-
     return (
 
         <ToggleButtonGroup vertical={true} className='radio-btn-group' name={`${classIndex}-toggle`} type='radio' defaultValue={''}>
             <ToggleButton
                 style={{ width: "100%" }} 
                 className="mb-1"
-                key={'' + classIndex}
-                id={`radio-${''}`}
+                key={name + classIndex}
+                id={name + classIndex}
                 variant='outline-secondary'
                 value={''}
                 checked={radioValue === ''}
@@ -35,7 +34,7 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
                     style={{ width: "100%", display: "flex", justifyContent: "space-between" }}
                     className="mb-1"
                     key={index}
-                    id={`radio-${index}`}
+                    id={`${file.name + index}`}
                     variant='outline-success'
                     value={file.name}
                     checked={radioValue === file.name}

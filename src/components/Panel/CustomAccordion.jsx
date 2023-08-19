@@ -12,14 +12,14 @@ export const CustomAccordion = ({ onChangeModel, onAddModelToList, material, siz
     Object.keys(MODELS).forEach(model => {
         FILTERED_MODELS[model] = [];
         MODELS[model].forEach(elem => {
-            const materialRegExp = new RegExp(`${'\[|mu\]'}`);
-            const sizeRegExp = new RegExp(`${'universal'}`);
-            const typeRegExp = new RegExp(`${'universal'}`);
-            const check = elem.name.match(materialRegExp)
+            // const materialRegExp = new RegExp(`${'\[|mu\]'}`);
+            // const sizeRegExp = new RegExp(`${'universal'}`);
+            // const typeRegExp = new RegExp(`${'universal'}`);
+            // const check = elem.name.match(materialRegExp)
             // console.log(`${regexp} is in ${elem.name}`)
-            if (check !== null){
-                console.log(`${materialRegExp} is in ${elem.name}: ${check}`)
-            }
+            // if (check !== null){
+            //     console.log(`${materialRegExp} is in ${elem.name}: ${check}`)
+            // }
             const pattern = `[${material}_${size}_${type}]`
             if (elem.name.includes('[universal]')) {
                 // console.log('[universal]', elem.name)

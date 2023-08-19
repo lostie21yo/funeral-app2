@@ -3,7 +3,14 @@ import { Container, ToggleButtonGroup } from 'react-bootstrap';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { CustomAccordion } from './CustomAccordion';
 
-const FilterRadioButtons = ({ list, setting, doSet, variant, def }) => {
+// function ClearCanvas({ onChangeModel, onAddModelToList }) {
+//     if (typeof file.name !== 'undefined') {
+//         onChangeModel(file.path.split("public/")[1] + "/" + file.name);
+//         onAddModelToList(classIndex, file.path.split("public/")[1] + "/" + file.name);
+//     }
+// }
+
+const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel, onAddModelToList }) => {
     return (
         <ToggleButtonGroup vertical={true} name={`${setting}-toggle`}
             type='radio' defaultValue={def} >
@@ -14,10 +21,14 @@ const FilterRadioButtons = ({ list, setting, doSet, variant, def }) => {
                     id={`${variant}-${idx}`}
                     type="radio"
                     variant={variant}
-                    name={`radio+${idx}`}
+                    name={`${radio}`}
                     value={radio.value}
                     checked={setting === radio.value}
-                    onChange={(e) => { doSet(e.currentTarget.value); console.log(radio, idx) }}
+                    onChange={(e) => {
+                        doSet(e.currentTarget.value)
+                        onChangeModel('');
+                        onAddModelToList(0, '', true);
+                    }}
                 >
                     {radio.name}
                 </ToggleButton>
@@ -58,21 +69,27 @@ function Filter({ onChangeModel, onAddModelToList }) {
                         <p style={{ margin: '0px 0px 4px 5px' }}>Материал</p>
                         <FilterRadioButtons key={materials} list={materials}
                             setting={material} doSet={setMaterial}
-                            variant={'outline-danger'} def={material} 
-                            />
+                            variant={'outline-danger'} def={material}
+                            onChangeModel={onChangeModel}
+                            onAddModelToList={onAddModelToList}
+                        />
                     </Container>
                     <Container style={{ padding: '0' }} className='filter-button-group'>
                         <p style={{ margin: '0px 0px 4px 5px' }}>Тип</p>
                         <FilterRadioButtons key={types} list={types}
                             setting={type} doSet={setType}
-                            variant={'outline-warning'} def={type} />
+                            variant={'outline-warning'} def={type}
+                            onChangeModel={onChangeModel}
+                            onAddModelToList={onAddModelToList} />
                     </Container>
                 </Container>
                 <Container className='filter-button-group' style={{ padding: '0px 6px 0px 4px' }}>
                     <p style={{ margin: '0px 0px 4px 5px' }}>Размер</p>
                     <FilterRadioButtons key={sizes} list={sizes}
                         setting={size} doSet={setSize}
-                        variant={'outline-primary'} def={size} />
+                        variant={'outline-primary'} def={size}
+                        onChangeModel={onChangeModel}
+                        onAddModelToList={onAddModelToList} />
                 </Container>
             </Container>
             <CustomAccordion

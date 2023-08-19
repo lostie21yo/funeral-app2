@@ -11,14 +11,19 @@ function App() {
     setCurrentModel(name);
   };
 
-  const [modelList, setModelList] = useState({}); // "-1": "/models/example.glb"
+  const [modelList, setModelList] = useState({});
 
-  const addModelToList = (index, path) => {
+  const addModelToList = (index, path, isMultiple = false) => {
+    if (!isMultiple) {
       modelList[index] = path;
-      // console.log('added', Object.keys(modelList), Object.values(modelList))
+    }
+    else {
+      for (var key in modelList) {
+        modelList[key] = '';
+      }
+    }
     setModelList(modelList);
   };
-
 
 
   return (
