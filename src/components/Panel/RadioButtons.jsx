@@ -4,27 +4,25 @@ import "./Panel.css";
 
 
 export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddModelToList }) => {
-    const emptyModel = `public/models/${name}/unselected.glb`
-
-    const [radioValue, setRadioValue] = useState(emptyModel);
+    const [radioValue, setRadioValue] = useState('');
 
 
     return (
 
-        <ToggleButtonGroup vertical={true} className='radio-btn-group' name={`${classIndex}-toggle`} type='radio' defaultValue={emptyModel}>
+        <ToggleButtonGroup vertical={true} className='radio-btn-group' name={`${classIndex}-toggle`} type='radio' defaultValue={''}>
             <ToggleButton
                 style={{ width: "100%" }} 
                 className="mb-1"
-                key={emptyModel + classIndex}
-                id={`radio-${emptyModel}`}
+                key={'' + classIndex}
+                id={`radio-${''}`}
                 variant='outline-secondary'
-                value={emptyModel}
-                checked={radioValue === emptyModel}
+                value={''}
+                checked={radioValue === ''}
                 onChange={(e) => setRadioValue(e.currentTarget.value)}
                 onClick={() => {
-                    if (typeof emptyModel !== 'undefined') {
-                        onChangeModel(emptyModel);
-                        onAddModelToList(classIndex, emptyModel);
+                    if (typeof '' !== 'undefined') {
+                        onChangeModel('');
+                        onAddModelToList(classIndex, '');
                     }
                 }
                 }

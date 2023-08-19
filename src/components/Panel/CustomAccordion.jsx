@@ -8,17 +8,25 @@ import { Accordion } from 'react-bootstrap';
 export const CustomAccordion = ({ onChangeModel, onAddModelToList, material, size, type }) => {
 
     const FILTERED_MODELS = {}
-    console.log('settings:', material, size, type)
+    // console.log('settings:', material, size, type)
     Object.keys(MODELS).forEach(model => {
         FILTERED_MODELS[model] = [];
         MODELS[model].forEach(elem => {
+            const materialRegExp = new RegExp(`${'\[|mu\]'}`);
+            const sizeRegExp = new RegExp(`${'universal'}`);
+            const typeRegExp = new RegExp(`${'universal'}`);
+            const check = elem.name.match(materialRegExp)
+            // console.log(`${regexp} is in ${elem.name}`)
+            if (check !== null){
+                console.log(`${materialRegExp} is in ${elem.name}: ${check}`)
+            }
             const pattern = `[${material}_${size}_${type}]`
             if (elem.name.includes('[universal]')) {
-                console.log('[universal]', elem.name)
+                // console.log('[universal]', elem.name)
                 FILTERED_MODELS[model].push(elem);
             }
             if (elem.name.includes(pattern)) {
-                console.log(pattern, elem.name)
+                // console.log(pattern, elem.name)
                 FILTERED_MODELS[model].push(elem);
             }
         });

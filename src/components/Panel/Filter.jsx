@@ -58,7 +58,8 @@ function Filter({ onChangeModel, onAddModelToList }) {
                         <p style={{ margin: '0px 0px 4px 5px' }}>Материал</p>
                         <FilterRadioButtons key={materials} list={materials}
                             setting={material} doSet={setMaterial}
-                            variant={'outline-danger'} def={material} />
+                            variant={'outline-danger'} def={material} 
+                            />
                     </Container>
                     <Container style={{ padding: '0' }} className='filter-button-group'>
                         <p style={{ margin: '0px 0px 4px 5px' }}>Тип</p>
