@@ -18,3 +18,17 @@
     font-weight: 600;
     color: white;
 }
+
+.fs-toggle {
+    width: 40px;
+    position: absolute;
+    margin: 15px;
+    padding: 0px;
+    left: 0px;
+    bottom: 0px;
+    z-index: 99999;
+    background-color: rgba(50, 50, 50, 0 );
+    -moz-user-select: none; 
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;}

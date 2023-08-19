@@ -31,7 +31,7 @@ export const CustomAccordion = ({ onChangeModel, onAddModelToList, material, siz
 
     return (
 
-        <Accordion defaultActiveKey={null} >
+        <Accordion defaultActiveKey={null} style={{padding: "0px 6px 6px 6px"}}>
             {Object.keys(FILTERED_MODELS).map((model, index) => (
                 <Accordion.Item eventKey={index} key={index}>
                     <PrimaryButton name={model} eventKey={index}>
