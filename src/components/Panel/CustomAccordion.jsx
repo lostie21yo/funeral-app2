@@ -19,11 +19,6 @@ export const CustomAccordion = ({ onChangeModel, onAddModelToList, material, siz
             }
         });
     })
-    // console.log(MODELS)
-
-    // console.log(FILTERED_MODELS)
-
-
 
     return (
 

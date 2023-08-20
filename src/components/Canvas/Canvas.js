@@ -1,12 +1,11 @@
 // import "src/App.css";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import "./Canvas.css";
 import { OrbitControls, Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { ModelConstructor } from "./ModelConstructor";
 import { Terrain } from "./Terrain";
 import Spinner from 'react-bootstrap/Spinner';
-import { Button } from "react-bootstrap";
 
 
 function FullScreenTgl() {
@@ -30,6 +29,7 @@ function FullScreenTgl() {
 }
 
 
+
 export const CanvasComponent = ({ currentModel, modelList }) => {
 
   return (
@@ -40,12 +40,13 @@ export const CanvasComponent = ({ currentModel, modelList }) => {
           onDoubleClick={FullScreenTgl}
           onCreated={() => console.log("Canvas rendered")}
           camera={{ fov: 75, position: [2.5, 1.3, -1.25] }}>
-          <directionalLight castShadow />
-          <pointLight position={[10, 10, 10]} />
+          <directionalLight intensity={0.4} castShadow />
+          
+          <pointLight intensity={0.4} position={[10, 10, 10]} />
           <OrbitControls target={[0, 0.2, 0]} maxPolarAngle={Math.PI * 0.50}
             maxDistance={10} enableDamping={true} />
           {/* <fog attach="fog" args={["#d0d0d0", 5, 20]} /> */}
-          <Terrain name={"/terrain/terrain.glb"} scale={0.5} />
+          <Terrain name={"/terrain/terrain.glb"} scale={1} />
           <ModelConstructor castShadow receiveShadow modelList={modelList} />
           <Environment path="/hdr/" files="lilienstein_2k.hdr" background />
         </Canvas>
