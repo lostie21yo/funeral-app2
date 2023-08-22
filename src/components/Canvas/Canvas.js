@@ -44,7 +44,7 @@ export const CanvasComponent = ({ currentModel, modelList }) => {
           <directionalLight intensity={0.7} castShadow />
           
           <pointLight intensity={1} position={[10, 10, 10]} />
-          <OrbitControls target={[0, 0.2, 0]} maxPolarAngle={Math.PI * 0.70}
+          <OrbitControls target={[0, 0.2, 0]} maxPolarAngle={Math.PI * 0.5}
             maxDistance={7} enableDamping={true} />
           {/* <fog attach="fog" args={["#d0d0d0", 5, 20]} /> */}
           <Terrain />
