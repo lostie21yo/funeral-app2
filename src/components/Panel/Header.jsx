@@ -16,7 +16,7 @@ export const Header = () => {
                             height="30"
                             className="d-inline-block align-top me-2"
                         />
-                        Ритуальная Мастерская
+                        Ритуал журнал
                     </Navbar.Brand>
                     {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
                     {/* <Navbar.Collapse id="basic-navbar-nav"> */}

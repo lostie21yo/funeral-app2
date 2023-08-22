@@ -6,6 +6,7 @@ import { Canvas } from "@react-three/fiber";
 import { ModelConstructor } from "./ModelConstructor";
 import { Terrain } from "./Terrain";
 import Spinner from 'react-bootstrap/Spinner';
+import { TestEnvironment } from "./TestEnvironment";
 
 
 function FullScreenTgl() {
@@ -40,13 +41,14 @@ export const CanvasComponent = ({ currentModel, modelList }) => {
           onDoubleClick={FullScreenTgl}
           onCreated={() => console.log("Canvas rendered")}
           camera={{ fov: 75, position: [2.5, 1.3, -1.25] }}>
-          <directionalLight intensity={0.4} castShadow />
+          <directionalLight intensity={0.7} castShadow />
           
-          <pointLight intensity={0.4} position={[10, 10, 10]} />
-          <OrbitControls target={[0, 0.2, 0]} maxPolarAngle={Math.PI * 0.50}
-            maxDistance={10} enableDamping={true} />
+          <pointLight intensity={1} position={[10, 10, 10]} />
+          <OrbitControls target={[0, 0.2, 0]} maxPolarAngle={Math.PI * 0.70}
+            maxDistance={7} enableDamping={true} />
           {/* <fog attach="fog" args={["#d0d0d0", 5, 20]} /> */}
-          <Terrain name={"/terrain/terrain.glb"} scale={1} />
+          <Terrain />
+          <TestEnvironment/>
           <ModelConstructor castShadow receiveShadow modelList={modelList} />
           <Environment path="/hdr/" files="lilienstein_2k.hdr" background />
         </Canvas>

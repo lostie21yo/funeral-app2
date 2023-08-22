@@ -2,8 +2,9 @@ import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from 'three'
 
-export const Terrain = ({ name, scale }) => {
-  const terrain = useLoader(GLTFLoader, name);
+export const Terrain = () => {
+  const terrain = useLoader(GLTFLoader, "/terrain/terrain2.glb");
+  // const test = useLoader(GLTFLoader, '');
 
   // const dirLight = new THREE.DirectionalLight(0xffffff, 1);
   // dirLight.position.set(- 3, 10, - 10);
@@ -17,9 +18,8 @@ export const Terrain = ({ name, scale }) => {
 
   return (
     <>
-      <primitive object={terrain.scene} scale={scale} castShadow receiveShadow />;
-      {/* <primitive object={dirLight}  castShadow receiveShadow />; */}
-      
+      <primitive object={terrain.scene} scale={1} castShadow receiveShadow />;
+      {/* <primitive object={test.scene} scale={scale} castShadow receiveShadow />; */}
     </>
 
   )
