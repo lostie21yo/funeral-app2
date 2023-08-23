@@ -79,7 +79,8 @@
   object-fit: contain;
   position: absolute;
   right: 0%;
-  opacity: linear-gradient(to left, #11de93, #0e7ad6);;
+  background-color: linear-gradient(to left, #11de93, #0e7ad6);
+  opacity: 80%;
 }
 
 .radio-btn-group {
