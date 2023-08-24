@@ -59,7 +59,7 @@
 }
 
 .btn-image-container {
-  height: 90px;
+  height: 80px;
   position: relative;
   right: 0%;
   text-align: center;
@@ -71,7 +71,8 @@
 .btn-image-text-position {
   position: absolute;
   top: 50%;
-  left: 7%;
+  left: 5%;
+  transform: translate(0, -50%)
 }
 
 .btn-image {
@@ -83,7 +84,7 @@
 
 .gradient {
 	position: absolute;
-  height: 90px;
+  height: 100%;
   right: 0px;
 	line-height: 0;
   /* width: 300px; */
