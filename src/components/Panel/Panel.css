@@ -59,28 +59,46 @@
 }
 
 .btn-image-container {
-  height: 70px;
+  height: 90px;
   position: relative;
+  right: 0%;
   text-align: center;
   color: white;
   /* border: 1px solid blue; */
-  background-color: rgb(43, 48, 53);
+  background-color: #2b3035;
 }
 
 .btn-image-text-position {
   position: absolute;
   top: 50%;
   left: 7%;
-  transform: translate(0, -50%);
 }
 
 .btn-image {
   height: 100%;
   object-fit: contain;
-  position: absolute;
-  right: 0%;
-  background-color: linear-gradient(to left, #11de93, #0e7ad6);
-  opacity: 80%;
+  /* position: absolute; */
+  /* right: 0%; */
+}
+
+.gradient {
+	position: absolute;
+  height: 90px;
+  right: 0px;
+	line-height: 0;
+  /* width: 300px; */
+}
+.gradient:after {
+	content: "";
+	display: block;    
+	width: 100%;
+	height: 100%;    
+	position: absolute;
+	top: 0;      
+	left: 0;   
+	background: transparent;
+	background-image: linear-gradient(to right, #2b3035, #0000001e);
+	opacity: 1;
 }
 
 .radio-btn-group {
@@ -100,20 +118,8 @@
 
 /* FOOTER */
 .footer {
-  /* width: 35%; */
-  height: 70px;
-  flex: 0 0 auto;
-  /* border: 1px solid red;  */
-  /* justify-content: center; */
-  /* vertical-align: middle; */
-  /* flex-wrap: wrap; */
-  /* position: absolute; */
-  bottom: 0px;
-
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  border: 1px solid blue;
+  background-color: rgb(43,48,53);
+  color: white;
 }
 
 .footer-button {

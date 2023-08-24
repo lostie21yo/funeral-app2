@@ -6,7 +6,7 @@ export const Header = () => {
 
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark" style={{backgroundColor: "#1c2128"}}>
+            <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark" style={{ backgroundColor: "#1c2128" }}>
                 <Container>
                     <Navbar.Brand  >
                         <img
@@ -20,7 +20,7 @@ export const Header = () => {
                     </Navbar.Brand>
                     {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
                     {/* <Navbar.Collapse id="basic-navbar-nav"> */}
-                        {/* <Nav className="me-auto">
+                    {/* <Nav className="me-auto">
                             <Nav.Link href="#home">Home</Nav.Link>
                             <Nav.Link href="#link">Link</Nav.Link>
 

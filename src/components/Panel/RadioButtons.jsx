@@ -47,7 +47,7 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
                     }
                     }
                 >
-                    {file.name.split('[')[0]}
+                    {file.name.split('[')[0].replace('.glb', '')}
                     <Badge pill bg="info">Price</Badge>
 
                 </ToggleButton>

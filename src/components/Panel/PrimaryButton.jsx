@@ -7,10 +7,20 @@ export const PrimaryButton = ({ name, eventKey }) => {
     );
 
     return (
-        <div onClick={decoratedOnClick} className='btn-image-container'>
+        // <div onClick={decoratedOnClick} className='gradient btn-image-container'>
+        //     <div>
+        //         <img src={`/Models/${name.toString()}/${name.toString()}.jpg`}
+        //             alt="button" className='btn-image'></img>
+        //         <div className="btn-image-text-position">{name}</div>
+        //     </div>
+        // </div>
 
-            <img src={`/Models/${name.toString()}/${name.toString()}.png`} alt="button" className='btn-image'></img>
-            <span className="btn-image-text-position">{name}</span>
+        <div onClick={decoratedOnClick} className='btn-image-container'>
+            <div className="gradient">
+                <img src={`/Models/${name.toString()}/${name.toString()}.jpg`} alt="" className="btn-image"/>
+            </div>
+            <div className="btn-image-text-position">{name}</div>
         </div>
+
     );
 }
