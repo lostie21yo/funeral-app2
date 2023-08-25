@@ -63,26 +63,26 @@ function Filter({ onChangeModel, onAddModelToList }) {
     return (
         <div className="scrollbar scrollbar-primary" >
 
-            <Container className='filter' style={{ padding: '0px 0px 8px 0px' }}>
-                <Container className='filter-button-group' style={{ padding: '0px 4px 0px 6px' }}>
-                    <Container style={{ padding: '0' }} className='filter-button-group'>
-                        <p style={{ margin: '0px 0px 4px 5px' }}>Материал</p>
-                        <FilterRadioButtons key={materials} list={materials}
-                            setting={material} doSet={setMaterial}
-                            variant={'outline-danger'} def={material}
-                            onChangeModel={onChangeModel}
-                            onAddModelToList={onAddModelToList}
-                        />
-                    </Container>
-                    <Container style={{ padding: '0' }} className='filter-button-group'>
-                        <p style={{ margin: '0px 0px 4px 5px' }}>Тип</p>
-                        <FilterRadioButtons key={types} list={types}
-                            setting={type} doSet={setType}
-                            variant={'outline-warning'} def={type}
-                            onChangeModel={onChangeModel}
-                            onAddModelToList={onAddModelToList} />
-                    </Container>
+            {/* <Container className='filter' style={{ padding: '0px 0px 8px 0px' }}> */}
+            <Container className='filter-button-group' style={{ padding: '0px 6px 8px 6px' }}>
+                <Container style={{ padding: '0' }} className='filter-button-group'>
+                    <p style={{ margin: '0px 0px 4px 5px' }}>Материал</p>
+                    <FilterRadioButtons key={materials} list={materials}
+                        setting={material} doSet={setMaterial}
+                        variant={'outline-danger'} def={material}
+                        onChangeModel={onChangeModel}
+                        onAddModelToList={onAddModelToList}
+                    />
                 </Container>
+                <Container style={{ padding: '0' }} className='filter-button-group'>
+                    <p style={{ margin: '0px 0px 4px 5px' }}>Тип</p>
+                    <FilterRadioButtons key={types} list={types}
+                        setting={type} doSet={setType}
+                        variant={'outline-warning'} def={type}
+                        onChangeModel={onChangeModel}
+                        onAddModelToList={onAddModelToList} />
+                </Container>
+                {/* </Container> */}
                 {/* <Container className='filter-button-group' style={{ padding: '0px 6px 0px 4px' }}>
                     <p style={{ margin: '0px 0px 4px 5px' }}>Размер</p>
                     <FilterRadioButtons key={sizes} list={sizes}
