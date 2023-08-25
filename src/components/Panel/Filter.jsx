@@ -83,14 +83,14 @@ function Filter({ onChangeModel, onAddModelToList }) {
                             onAddModelToList={onAddModelToList} />
                     </Container>
                 </Container>
-                <Container className='filter-button-group' style={{ padding: '0px 6px 0px 4px' }}>
+                {/* <Container className='filter-button-group' style={{ padding: '0px 6px 0px 4px' }}>
                     <p style={{ margin: '0px 0px 4px 5px' }}>Размер</p>
                     <FilterRadioButtons key={sizes} list={sizes}
                         setting={size} doSet={setSize}
                         variant={'outline-primary'} def={size}
                         onChangeModel={onChangeModel}
                         onAddModelToList={onAddModelToList} />
-                </Container>
+                </Container> */}
             </Container>
             <CustomAccordion
                 material={material}

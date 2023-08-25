@@ -1,5 +1,5 @@
 .panel {
-  width: 35%;
+  width: 30%;
   right: 0px;
   background-color: #212529;
   position: fixed;
@@ -15,19 +15,18 @@
   padding: 6px;
   justify-content: center;
   display: flex;
-  align-items: stretch;
-  align-content: stretch;
+  /* align-items: stretch; */
+  /* align-content: stretch; */
   /* flex-wrap: wrap */
 }
 
 .filter-button-group {
   margin: 0px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   display: flex;
-  align-content: stretch;
-  align-items: stretch;
+  /* align-content: stretch; */
+  /* align-items: stretch; */
   flex-direction: column;
-
 }
 
 /* MENU */
@@ -114,6 +113,10 @@
   /* justify-content: center; */
   display: flex;
   position: relative;
+}
+
+.badge {
+  height: 23px;
 }
 
 
