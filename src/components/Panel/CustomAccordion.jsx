@@ -1,6 +1,6 @@
 import MODELS from "../../assets/models.json";
 import { PrimaryButton } from './PrimaryButton';
-import { RadioButtons } from './RadioButtons';
+import { ColorFilter } from './RadioButtons';
 import "./Panel.css";
 import { Accordion } from 'react-bootstrap';
 
@@ -12,9 +12,9 @@ export const CustomAccordion = ({ onChangeModel, onAddModelToList, material, siz
     Object.keys(MODELS).forEach(model => {
         FILTERED_MODELS[model] = [];
         MODELS[model].forEach(elem => {
-            if ((elem.name.includes('[u_') || elem.name.includes(`[${material}_`))
+            if (((elem.name.includes('[u_') || elem.name.includes(`[${material}_`))
                 && (elem.name.includes('_u_') || elem.name.includes(`_${size}_`))
-                && (elem.name.includes('_u]') || elem.name.includes(`_${type}]`)) 
+                && (elem.name.includes('_u]') || elem.name.includes(`_${type}]`))) 
                 || (!elem.name.includes('['))) {
                 FILTERED_MODELS[model].push(elem);
             }
@@ -29,8 +29,8 @@ export const CustomAccordion = ({ onChangeModel, onAddModelToList, material, siz
                     <PrimaryButton name={model} eventKey={index}>
                         {model}
                     </PrimaryButton>
-                    <Accordion.Body key={index} style={{ padding: "12px 16px " }}>
-                        <RadioButtons
+                    <Accordion.Body key={index} style={{ padding: "10px 10px" }}>
+                        <ColorFilter
                             name={model}
                             key={index + FILTERED_MODELS[model]}
                             classIndex={index}

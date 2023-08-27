@@ -101,6 +101,17 @@
 	opacity: 1;
 }
 
+/* COLOR RADIO BUTTON GROUP*/
+
+.color-toggle-button {
+  padding: 3px 6px;
+  margin: 0px 5px 0px 0px;
+  width: 40px;
+  height: 30px;
+}
+
+/* FILTER RADIO BUTTON GROUP */
+
 .radio-btn-group {
   width: 100%;
   position: fixed;
