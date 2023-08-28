@@ -37,7 +37,7 @@ const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel,
     )
 }
 
-export default function Filter({ onChangeModel, onAddModelToList }) {
+export default function FilterMST({ onChangeModel, onAddModelToList }) {
     const [material, setMaterial] = useState('granite');
     const [size, setSize] = useState('100');
     const [type, setType] = useState('u');

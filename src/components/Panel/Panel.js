@@ -3,8 +3,7 @@ import "./Panel.css";
 import { Header } from "./Header";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Footer } from "./Footer";
-import Filter from "./Filter";
-
+import FilterMST from "./FilterMST";
 
 
 export const Panel = ({ onChangeModel, onAddModelToList,  }) => {
@@ -13,7 +12,7 @@ export const Panel = ({ onChangeModel, onAddModelToList,  }) => {
   return (
     <div className={"panel"}>
       <Header />
-      <Filter onChangeModel={onChangeModel}
+      <FilterMST onChangeModel={onChangeModel}
         onAddModelToList={onAddModelToList} />
       <Footer />
     </div>

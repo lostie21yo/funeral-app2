@@ -1,28 +1,50 @@
 import MODELS from "../../assets/models.json";
 import { PrimaryButton } from './PrimaryButton';
-import { ColorFilter } from './RadioButtons';
+import { FilterCH } from './FilterCH';
 import "./Panel.css";
 import { Accordion } from 'react-bootstrap';
 
+
 const CustomAccordionItem = ({ model, index, activeKey, doSet, FILTERED_MODELS, onChangeModel, onAddModelToList }) => {
 
-    const colors = [
+    const color_params = [
         { name: 'black', value: '#000000' },
         { name: 'green', value: '#113b26' },
         { name: 'brown', value: '#291e00' },
         { name: 'silver', value: '#c0c0c0' }
     ];
+    const height_params = [
+        { name: '60 см', value: '60' },
+        { name: '70 см', value: '70' },
+        { name: '80 см', value: '80' },
+        { name: '90 см', value: '90' },
+        { name: '100 см', value: '100' },
+        { name: '120 см', value: '120' },
+        { name: 'Семейный', value: 'family' },
+    ];
 
     var colorSet = new Set()
     FILTERED_MODELS[model].forEach(elem => {
-        colors.forEach(color => {
+        color_params.forEach(color => {
             // console.log(elem.name, color)
-            if ((elem.name.includes(`(${color.name})`))) {
+            if ((elem.name.includes(`${color.name})`))) {
                 colorSet.add(color)
             }
         });
     })
     colorSet = Array.from(colorSet)
+
+    var heightSet = new Set()
+    FILTERED_MODELS[model].forEach(elem => {
+        height_params.forEach(height => {
+            // console.log(elem.name, color)
+            if ((elem.name.includes(`(${height.value}`))) {
+                heightSet.add(height)
+            }
+        });
+    })
+    heightSet = Array.from(heightSet)
+    console.log(heightSet)
 
     return (
         <Accordion.Item key={index} eventKey={index} onClick={() => {
@@ -32,10 +54,10 @@ const CustomAccordionItem = ({ model, index, activeKey, doSet, FILTERED_MODELS, 
                 {model}
             </PrimaryButton>
             <Accordion.Body key={index} style={{ padding: "10px 10px" }}>
-                <ColorFilter
-                    name={model} colorSet={colorSet}
+                <FilterCH
+                    name={model} classIndex={index}
+                    heightSet={heightSet} colorSet={colorSet}
                     key={index + FILTERED_MODELS[model]}
-                    classIndex={index}
                     files={FILTERED_MODELS[model]}
                     onChangeModel={onChangeModel}
                     onAddModelToList={onAddModelToList} />
