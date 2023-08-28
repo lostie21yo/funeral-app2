@@ -1,65 +1,68 @@
 import { useState } from 'react';
-import { ToggleButton, Badge, ToggleButtonGroup, Container, Button, ButtonGroup } from "react-bootstrap";
+import { ToggleButton, Badge, ToggleButtonGroup } from "react-bootstrap";
 import "./Panel.css";
 
 const ColorRadioButtons = ({ list, setting, doSet, def, index, onChangeModel, onAddModelToList }) => {
+
+    if (list.length === 0) return null
+
     return (
-        <ToggleButtonGroup name={`${index}-color-toggle`}
-            type='radio' defaultValue={def}
-            style={{ width: '100%', padding: '0px 0px 10px 0px' }}>
-            {list.map((color, idx) => (
-                <ToggleButton
-                    className='color-toggle-button'
-                    style={{ border: `1px solid ${color.value}`, "--bs-btn-active-bg": `${color.value}`, '--bs-btn-bg': '#2b3035' }} //, '--bs-btn-bg': '#2b3035' 
-                    key={`${index}-${idx}`}
-                    id={`${index}-${idx}`}
-                    type="radio"
-                    variant='outline-secondary'
-                    name={`${color}`}
-                    value={color.value}
-                    checked={setting === color.value}
-                    onChange={(e) => {
-                        doSet(e.currentTarget.value)
-                        // onChangeModel('');
-                        // onAddModelToList(0, '', true);
-                    }}
-                >
-                    {/* {color.name[0]} */}
-                </ToggleButton>
-            ))}
-        </ToggleButtonGroup>
+        <div className="color-btn-group">
+            <span>Цвет</span>
+            <ToggleButtonGroup name={`${index}-color-toggle`}
+                type='radio' defaultValue={def}>
+                {list.map((color, idx) => (
+                    <ToggleButton
+                        className='color-toggle-button'
+                        style={{
+                            '--bs-btn-border-width': "1px",
+                            '--bs-btn-border-color': 'transparent',
+                            '--bs-btn-bg': `${color.value}`,
+                            '--bs-btn-active-bg': `${color.value}`,
+                            '--bs-btn-active-border-color': 'green',
+                        }}
+                        key={`${index}-${idx}`}
+                        id={`${index}-${idx}`}
+                        type="radio"
+                        variant='outline-secondary'
+                        name={`${color}`}
+                        value={color.name}
+                        checked={setting === color.name}
+                        onChange={(e) => {
+                            doSet(e.currentTarget.value)
+                            // onChangeModel('');
+                            // onAddModelToList(0, '', true);
+                        }}>
+                        {/* {color.name[0]} */}
+                    </ToggleButton>
+                ))}
+            </ToggleButtonGroup>
+        </div>
     )
 }
 
-export const ColorFilter = ({ files, name, onChangeModel, classIndex, onAddModelToList }) => {
+export const ColorFilter = ({ files, name, onChangeModel, classIndex, onAddModelToList, colorSet }) => {
 
     const [color, setColor] = useState('black')
 
-    const colors = [
-        { name: 'Черный', value: 'black' },
-        { name: 'Красный', value: 'red' },
-        { name: 'Синий', value: 'blue' },
-        { name: 'Желтый', value: 'yellow' }
-    ];
-
-
     var colored_files = []
-    console.log(name)
+
     files.forEach(model => {
         // console.log(model.name)
         if ((model.name.includes(`(${color})`)) || (!model.name.includes('('))) {
             colored_files.push(model);
         }
     })
-    
+
     return (
         <>
             <ColorRadioButtons
                 key={classIndex} def={color}
-                index={classIndex} list={colors}
+                index={classIndex} list={colorSet}
                 setting={color} doSet={setColor}
                 onChangeModel={onChangeModel}
                 onAddModelToList={onAddModelToList} />
+
             <RadioButtons
                 name={name}
                 key={classIndex + name}
@@ -68,11 +71,11 @@ export const ColorFilter = ({ files, name, onChangeModel, classIndex, onAddModel
                 onChangeModel={onChangeModel}
                 onAddModelToList={onAddModelToList} />
         </>
-
     )
 }
 
 const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddModelToList }) => {
+
     const [radioValue, setRadioValue] = useState('');
 
     return (

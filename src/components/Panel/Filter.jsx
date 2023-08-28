@@ -41,6 +41,7 @@ export default function Filter({ onChangeModel, onAddModelToList }) {
     const [material, setMaterial] = useState('granite');
     const [size, setSize] = useState('100');
     const [type, setType] = useState('u');
+    const [activeKey, setActiveKey] = useState(null)
 
     const materials = [
         { name: 'Гранит', value: 'granite' },
@@ -93,10 +94,11 @@ export default function Filter({ onChangeModel, onAddModelToList }) {
                 </Container>
             </Container>
             <CustomAccordion
+                activeKey={activeKey}
+                doSet={setActiveKey}
                 material={material}
                 key={material + size + type}
-                size={size}
-                type={type}
+                size={size} type={type}
                 onChangeModel={onChangeModel}
                 onAddModelToList={onAddModelToList} />
         </div>
