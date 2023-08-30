@@ -6,7 +6,6 @@ import { Canvas } from "@react-three/fiber";
 import { ModelConstructor } from "./ModelConstructor";
 import { Terrain } from "./Terrain";
 import Spinner from 'react-bootstrap/Spinner';
-import { TestEnvironment } from "./TestEnvironment";
 
 
 function FullScreenTgl() {
@@ -48,7 +47,6 @@ export const CanvasComponent = ({ currentModel, modelList }) => {
             maxDistance={7} enableDamping={true} />
           {/* <fog attach="fog" args={["#d0d0d0", 5, 20]} /> */}
           <Terrain />
-          <TestEnvironment/>
           <ModelConstructor castShadow receiveShadow modelList={modelList} />
           <Environment path="/hdr/" files="lilienstein_2k.hdr" background />
         </Canvas>

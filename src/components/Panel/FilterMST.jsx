@@ -13,10 +13,10 @@ import { CustomAccordion } from './CustomAccordion';
 const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel, onAddModelToList }) => {
     return (
         <ToggleButtonGroup vertical={true} name={`${setting}-toggle`}
-            type='radio' defaultValue={def} >
+            type='radio' defaultValue={def} style={{height: '100%', display: 'flex'}}>
             {list.map((radio, idx) => (
                 <ToggleButton
-                    style={{ padding: "3px 6px " }}
+                    style={{ padding: "3px 6px", display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                     key={`${variant}-${idx}`}
                     id={`${variant}-${idx}`}
                     type="radio"
@@ -48,12 +48,11 @@ export default function FilterMST({ onChangeModel, onAddModelToList }) {
         { name: 'Мрамор', value: 'marble' },
     ];
     const sizes = [
-        { name: '70 см', value: '70' },
-        { name: '80 см', value: '80' },
-        { name: '90 см', value: '90' },
         { name: '100 см', value: '100' },
         { name: '120 см', value: '120' },
-        { name: 'Семейный', value: 'family' },
+        { name: '150 см', value: '150' },
+        { name: '170 см', value: '170' },
+        { name: '200 см', value: '200' },
     ];
     const types = [
         { name: 'Стандарт', value: 'u' },
@@ -64,8 +63,8 @@ export default function FilterMST({ onChangeModel, onAddModelToList }) {
     return (
         <div className="scrollbar scrollbar-primary" >
 
-            <Container className='filter' style={{ padding: '0px 0px 8px 0px' }}>
-                <Container className='filter-button-group' style={{ padding: '0px 6px 8px 6px' }}>
+            <Container className='filter' style={{ padding: '0px 6px 10px' }}>
+                <Container className='filter-button-group' style={{ padding: '0px 3px 0px 0px' }}>
                     <Container style={{ padding: '0' }} className='filter-button-group'>
                         <p style={{ margin: '0px 0px 4px 5px' }}>Материал</p>
                         <FilterRadioButtons key={materials} list={materials}
@@ -84,7 +83,7 @@ export default function FilterMST({ onChangeModel, onAddModelToList }) {
                             onAddModelToList={onAddModelToList} />
                     </Container>
                 </Container>
-                <Container className='filter-button-group' style={{ padding: '0px 6px 0px 4px' }}>
+                <Container className='filter-button-group' style={{ padding: '0px 0px 0px 3px' }}>
                     <p style={{ margin: '0px 0px 4px 5px' }}>Ширина</p>
                     <FilterRadioButtons key={sizes} list={sizes}
                         setting={size} doSet={setSize}

@@ -10,17 +10,16 @@ const CustomAccordionItem = ({ model, index, activeKey, doSet, FILTERED_MODELS, 
     const color_params = [
         { name: 'black', value: '#000000' },
         { name: 'green', value: '#113b26' },
-        { name: 'brown', value: '#291e00' },
+        { name: 'brown', value: '#572700' },
         { name: 'silver', value: '#c0c0c0' }
     ];
     const height_params = [
-        { name: '60 см', value: '60' },
-        { name: '70 см', value: '70' },
-        { name: '80 см', value: '80' },
-        { name: '90 см', value: '90' },
-        { name: '100 см', value: '100' },
-        { name: '120 см', value: '120' },
-        { name: 'Семейный', value: 'family' },
+        { name: '60 см', value: 60 },
+        { name: '70 см', value: 70 },
+        { name: '80 см', value: 80 },
+        { name: '90 см', value: 90 },
+        { name: '100 см', value: 100 },
+        { name: '120 см', value: 120 },
     ];
 
     var colorSet = new Set()
@@ -43,8 +42,16 @@ const CustomAccordionItem = ({ model, index, activeKey, doSet, FILTERED_MODELS, 
             }
         });
     })
-    heightSet = Array.from(heightSet)
-    console.log(heightSet)
+    heightSet = Array.from(heightSet).sort(function (a, b) {
+        if (a.value > b.value) {
+            return 1;
+        }
+        if (a.value < b.value) {
+            return -1;
+        }
+        // a должно быть равным b
+        return 0;
+    });
 
     return (
         <Accordion.Item key={index} eventKey={index} onClick={() => {
