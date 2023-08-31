@@ -82,7 +82,7 @@ const ColorRadioButtons = ({ list, setting, doSet, def, index }) => {
 export const FilterCH = ({ files, name, onChangeModel, classIndex, onAddModelToList, colorSet, heightSet }) => {
 
     const [color, setColor] = useState('black')
-    const [height, setHeight] = useState('100')
+    const [height, setHeight] = useState(100)
 
     var filtered_files = new Set()
     files.forEach(model => {
