@@ -10,9 +10,9 @@ export const PrimaryButton = ({ name, eventKey }) => {
 
         <div onClick={decoratedOnClick} className='btn-image-container'>
             <div className="gradient">
-                <img src={`/Models/${name.toString()}/${name.toString()}.jpg`} alt="" className="btn-image"/>
+                <img src={`/Models/${name.toString()}/image.jpg`} alt="" className="btn-image"/>
             </div>
-            <div className="btn-image-text-position">{name}</div>
+            <div className="btn-image-text-position">{name.split('_')[1]}</div>
         </div>
 
     );

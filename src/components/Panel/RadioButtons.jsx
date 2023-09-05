@@ -4,24 +4,39 @@ import "./Panel.css";
 
 export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddModelToList }) => {
 
-    const [radioValue, setRadioValue] = useState('');
+    var replacement = ''
+    if (['1_Облицовка', '2_Надгробия'].includes(name)) {
+        replacement = `Не выбрано.glb`
+
+    }
+
+    files.forEach((file) => {
+        if (file.name.includes('Не выбрано')) {
+            delete files[files.indexOf(file)]
+        }
+    })
+    // console.log(files)
+
+    const [radioValue, setRadioValue] = useState(replacement);
+    const path = `models/${name}/` + replacement
 
     return (
         <ToggleButtonGroup
             className='radio-btn-group' name={`${classIndex}-toggle`}
-            vertical={true} defaultValue={''} type='radio'>
+            vertical={true} defaultValue={replacement} type='radio'>
             <ToggleButton
                 style={{ width: "100%" }}
                 key={name + classIndex}
                 id={name + classIndex}
                 variant='outline-secondary'
-                value={''}
-                checked={radioValue === ''}
+                value={replacement}
+                checked={radioValue === replacement}
                 onChange={(e) => setRadioValue(e.currentTarget.value)}
                 onClick={() => {
-                    if (typeof '' !== 'undefined') {
-                        onChangeModel('');
-                        onAddModelToList(classIndex, '');
+                    if (typeof replacement !== 'undefined') {
+                        onChangeModel(path);
+                        onAddModelToList(classIndex, path);
+                        console.log(path)
                     }
                 }
                 }
@@ -42,6 +57,7 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
                         if (typeof file.name !== 'undefined') {
                             onChangeModel(file.path.split("public/")[1] + "/" + file.name);
                             onAddModelToList(classIndex, file.path.split("public/")[1] + "/" + file.name);
+                            console.log(file.path.split("public/")[1] + "/" + file.name)
                         }
                     }
                     }

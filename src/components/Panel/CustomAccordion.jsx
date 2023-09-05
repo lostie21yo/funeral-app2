@@ -76,7 +76,7 @@ const CustomAccordionItem = ({ model, index, activeKey, doSet, FILTERED_MODELS, 
 export const CustomAccordion = ({ onChangeModel, activeKey, doSet, onAddModelToList, material, size, type }) => {
 
     const FILTERED_MODELS = {}
-    console.log('settings: ', material, size, type)
+    // console.log('settings: ', material, size, type)
     Object.keys(MODELS).forEach(model => {
         FILTERED_MODELS[model] = [];
         MODELS[model].forEach(elem => {

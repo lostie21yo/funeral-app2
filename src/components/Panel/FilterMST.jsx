@@ -3,13 +3,6 @@ import { Container, ToggleButtonGroup } from 'react-bootstrap';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { CustomAccordion } from './CustomAccordion';
 
-// function ClearCanvas({ onChangeModel, onAddModelToList }) {
-//     if (typeof file.name !== 'undefined') {
-//         onChangeModel(file.path.split("public/")[1] + "/" + file.name);
-//         onAddModelToList(classIndex, file.path.split("public/")[1] + "/" + file.name);
-//     }
-// }
-
 const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel, onAddModelToList }) => {
     return (
         <ToggleButtonGroup vertical={true} name={`${setting}-toggle`}

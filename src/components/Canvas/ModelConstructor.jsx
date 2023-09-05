@@ -9,14 +9,13 @@ const Model = ({ name, scale, isVisible }) => {
   return isVisible ? <primitive object={obj.scene} scale={scale} castShadow receiveShadow/> : null;
 };
 
-
 export const ModelConstructor = ({ modelList }) => {
 
   return (
     Object.values(MODELS).map((category) =>
       Object.values(category).map((item) => {
         const name = (item.path + "/" + item.name).split("public/")[1];
-
+        // console.log(name)
         return (
           <Model key={name} name={name} isVisible={Object.values(modelList).includes(name)} />
         );
