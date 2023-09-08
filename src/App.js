@@ -30,11 +30,11 @@ function App() {
     setModelList(modelList);
   };
 
-  console.log(modelList)
+  // console.log(modelList)
 
   return (
     <>
-      <Panel onChangeModel={handleChangeModel} onAddModelToList={addModelToList} />
+      <Panel onChangeModel={handleChangeModel} onAddModelToList={addModelToList} modelList={modelList}/>
       <CanvasComponent currentModel={currentModel} modelList={modelList} />
     </>
   );

@@ -57,7 +57,7 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
                         if (typeof file.name !== 'undefined') {
                             onChangeModel(file.path.split("public/")[1] + "/" + file.name);
                             onAddModelToList(classIndex, file.path.split("public/")[1] + "/" + file.name);
-                            console.log(file.path.split("public/")[1] + "/" + file.name)
+                            // console.log(file.path.split("public/")[1] + "/" + file.name)
                         }
                     }
                     }

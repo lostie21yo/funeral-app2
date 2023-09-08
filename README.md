@@ -1,16 +1,9 @@
-# r3f-template
+# Проект "Ритуал журнал"
 
-If you are just starting off with react-three-fiber then this template is for you. I have done a basic setup and a few usefull packages along with it.
+## Инструкция по установке
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-| Packages        | Versions           |
-| ------------- |:-------------:|
-| three      | ^0.137.5 |
-| @react-three/fiber     | ^7.0.26     |
-| @react-three/drei     | ^8.8.1    |
-| @react-spring/three     | ^9.4.2    |
-| zustand     | ^3.6.9    |
+1. Установить Node.js
+Сюда пишу
 
 ## Using this Template
 
