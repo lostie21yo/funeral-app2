@@ -2,101 +2,86 @@
 
 ## Инструкция по установке
 
-1. Установить Node.js
-Сюда пишу
+1. Скачать и установить [Node.js](https://nodejs.org/ru/download)
+- Скачивание:
+Установщик Windows -> выбираем любое место и скачиваем
+- Установка:
+Во время установки ничего менять не нужно, просто нажимать "Next", "Finish" и т.п.
 
-## Using this Template
+2. Скачать и установить [Git](https://git-scm.com/downloads)
+- Скачивание:
+Download for Windows -> если операционная 64 бита, то "64-bit Git for Windows Setup", если 32 - то "32-bit Git for Windows Setup" (все современные ПК, как правило, идут 64 битные).
+- Установка:
+Все то же самое - ничего не меняем, прожимаем далее до самого конца и ждем окончания установки.
 
-make sure you run `npm install` after cloning this repostiory.
+3. Проверка успешности установки:
+- Открываем командную строку/cmd (можно просто в пуске в поиске вбить)
+- В появившемся черном окошке вбиваем `node -v` - нам показывает установленную версию Node js (должно быть что то вроде этого "v18.10.0")
+- В появившемся черном окошке вбиваем `git -v` - нам показывает установленную версию Git (должно быть что то вроде этого "git version 2.41.0.windows.3"). 
 
-There is a basic example on the repository as well. It is the same example as seen on the react-three-fiber repository page.
+Если все так, то все классно. Окно командной строки не закрываем, в ней будет дальнейшая работа. Идем далее.
 
-More examples are coming soon !
+4. Теперь скачиваем сам проект с удаленного сервера (туда я загружаю все внесенные в проект изменения).
+- Заходим в "Мой компьютер", открываем диск и папку, куда хотим скачать проект. Копируем путь к этой папке сверху.
+- Заходим в командную строку и пишем команду `cd *сюда вставляем путь Ctrl+V*` (должно получиться что-то вроде этого "cd C:\Ilya\coding"). Жмем Enter.
+- Теперь вводим следующую команду `git clone https://github.com/lostie21yo/funeral-app2`
+Это ссылка данного репозитория (хранилища с нашим проектом). Происходит скачивание. Ждем.
 
+5. Устанавливаем все программные библиотеки, благодаря которым данный проект может существовать.
+- В окне командной строки переходим внутрь папки проекта `cd funeral-app2`
+- Вводим команду: `npm install`. Данная команда некоторое время будет устанавливать разные требуемые проекту пакеты.
+На этом установка подошла к концу.
 
-## Read more
+6. Теперь ты можешь открывать приложение локально у себя на компьютере.
+- Для этого в командной строке вводим `npm start`
+- Сервер запускается. Приложение откроется во вкладке браузера.
 
-- Learn more about threejs - [https://threejs.org/](https://threejs.org/)
-- Learn more about react - [https://reactjs.org/](https://reactjs.org/)
-- Learn more about react-three-fiber - [https://github.com/pmndrs/react-three-fiber](https://github.com/pmndrs/react-three-fiber)
+## Работа с Blender
 
-## Installed Packages
+Как я понял, ты хочешь работать непосредственно с загрузкой моделей. Тут все достаточно просто.
 
-- [`@react-three/drei`](https://github.com/react-spring/drei) &ndash; useful helpers for react-three-fiber
-- [`zustand`](https://github.com/react-spring/zustand) &ndash; state management
-- [`react-use-gesture`](https://github.com/react-spring/react-use-gesture) &ndash; mouse/touch gestures
-- [`aphrodite`](https://github.com/Khan/aphrodite) &ndash; Support for colocating your styles with your JavaScript component.
-~~-  [`r3f-perf`](https://github.com/RenaudRohlinger/r3f-perf) &ndash; Easily monitor the performances of your React-Three-Fiber application~~ was causing frame drops use <Stats /> from 'drei' instead
-- [`react-three-gui`](https://github.com/ueno-llc/react-three-gui) &ndash; GUI/debug tools
+1. Александр отправляет модели в формате .obj с доп файлом .mtl, модели в таком формате весят существенно больше и работать с ними в вебе сложнее. По этой причине модели загружаются в приложение в формате .glb. Преобразовать формат .obj в .glb можно в программе Blender (бесплатная программа, [ссылка на оф. сайт, где можно ее скачать](https://www.blender.org/))
 
-## Showoff
+2. Не пугайся. Тут дело за малым. Все что нужно - это сначала загрузить модели .obj в blender. 
+- Удалить всё лишнее со сцены (по умолчанию там будет кубик, камера и свет). Выделяешь лкм - удаляешь (Del).
+- Сверху в левом углу есть кнопка "File". Жмем. В выпадающем списке есть "Import". Жмем.
+- В этом списке выбираем "Wavefront (.obj)" и далее просто указываем где лежит модель в формате .obj.
+- Выбираем, нажимаем снизу "Import Wavefront OBJ" и модель должна появиться в окне.
+- Тут получается тебе нужно эту модель позиционировать, может менять масштаб и т.п., советую найти какой нибудь простенький урок на ютубе (в основном горячими клавишами манипуляции проводят)
 
-- [Jacob's Creek Wine Guide](https://experiencejacobscreek.com/test) - Made by the [AutoVRse](https://autovrse.in) Team for Jacob's Creek India
-- [Car Configurator](https://webxr.autovrse.in/3d-automotive-configurator) - becoming open source soon !
+3. После всех манипуляций, нужно сохранить эту модель в формате .glb.
+- Для этого открываем ту же кнопку "File". Там жмём "Export". В списке выбираем "glTF (.glb/.gltf)".
+- Теперь просто выбираем папку, где сохранить это модель.
 
-## Available NPM Scripts
+## Загрузка модели в формате .glb в приложение
 
-In the project directory, you can run:
+Осталось немного.
+1. В папке с проектом (funeral-app2) переходим public -> models. Тут лежат папки всех классов.
 
-### `npm start`
+2. Выбираешь нужную папку, исходя из класса новой модели. Там лежат непосредственно сами файлы с моделями.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+3. Перемещаешь новую модель сюда.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+4. Теперь ее остается переименовать определенным образом, чтоб она фильтровалась как нужно.
+* Все что идет до скобки `[` - это название продукции
+* Внутри квадратных скобок указывается следующее `[материал_ширина_тип(религиозность)]` (сюда смотрит верхний фильтр в приложении)
+- материал может быть `granite`, `marble` (мрамор) и `u` (универсальная модель по параметру материала, т.е. относится и туда и сюда)
+- ширина сейчас не столько важна, но все же пока такая картина. Ширина может быть `100`, `120`, `150`, `170`, `200`. Параметр `u` работает так же - универсальная ширина.
+- тип(религиозность) может быть следующим `orthodox` (православный), `muslim` (мусульманский) и `u` (универсальный).
 
-### `npm test`
+* В круглых скобках указывается цвет или высота (называю его нижним фильтром). Круглые скобки опциональные и могут вообще не указываться.
+- Цвет может принимать следующие варианты: `black` (черный), `green` (зеленый), `brown` (коричневый), `silver` (серебряный)
+- Высота может принимать следующие варианты: `60`, `70`, `80`, `90`, `100`, `120`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5. Пару примеров моделей:
+- `Памятник вола Габро [granite_u_u] (60).glb`
+Памятник вола Габро из гранита (granite) универсальный по ширине (u) и универсальный по типу (u) высотой 60 см (60).
+- `Крест Эконом [u_u_orthodox] (silver)`
+Крест Эконом универсальный по материалу, универсальный по ширине, православного типа и имеет серебристый цвет.
 
-### `npm run build`
+6. После добавления моделей в папки программа их не видит в режиме реального времени. Нужно его запустить заного.
+- Останавливаем сервер (если он работает). Для этого в командной строке жмем горячие клавиши Ctrl+C, вводим `y`. Enter.
+- Запускаем сервер заного командой `npm start`.
+- Добавленные модели, если все верно указано, должны появится для выбора в соответствующих кнопках (не забудь про фильтрацию).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* На этом все, надеюсь понятно объяснил. Если что-то неясно и есть вопросы, пиши в телеграмме, постараюсь помочь. 
