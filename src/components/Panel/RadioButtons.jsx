@@ -5,7 +5,7 @@ import "./Panel.css";
 export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddModelToList }) => {
 
     var replacement = ''
-    if (['1_Облицовка', '2_Надгробия'].includes(name)) {
+    if (['1_Облицовка'].includes(name)) {
         replacement = `Не выбрано.glb`
 
     }
@@ -62,7 +62,9 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
                     }
                     }
                 >
-                    {file.name.split('[')[0].replace('.glb', '')}
+                    {/* {file.name.split('[')[0].replace('.glb', '')} */}
+                    {file.name}
+
                     <Badge pill bg="info" className='badge'>Price</Badge>
 
                 </ToggleButton>

@@ -12,8 +12,8 @@ function App() {
   };
 
   const [modelList, setModelList] = useState({});
-  if(modelList[1] === undefined) {modelList[1] = 'models/2_Надгробия/Не выбрано.glb'}
   if(modelList[0] === undefined) {modelList[0] = 'models/1_Облицовка/Не выбрано.glb'}
+  // if(modelList[1] === undefined) {modelList[1] = 'models/2_Надгробия/Не выбрано.glb'}
 
 
   const addModelToList = (index, path, isMultiple = false) => {
@@ -24,8 +24,8 @@ function App() {
       for (var key in modelList) {
         modelList[key] = '';
       }
-      modelList[1] = 'models/2_Надгробия/Не выбрано.glb'
       modelList[0] = 'models/1_Облицовка/Не выбрано.glb'
+      // modelList[1] = 'models/2_Надгробия/Не выбрано.glb'
     }
     setModelList(modelList);
   };

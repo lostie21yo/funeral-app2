@@ -13,6 +13,7 @@ const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel,
                     key={`${variant}-${idx}`}
                     id={`${variant}-${idx}`}
                     type="radio"
+                    {...console.log(radio)}
                     variant={variant}
                     name={`${radio}`}
                     value={radio.value}
@@ -33,7 +34,7 @@ const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel,
 export default function FilterMST({ onChangeModel, onAddModelToList }) {
     const [material, setMaterial] = useState('granite');
     const [size, setSize] = useState('100');
-    const [type, setType] = useState('u');
+    const [type, setType] = useState('standard');
     const [activeKey, setActiveKey] = useState(null)
 
     const materials = [
@@ -42,13 +43,13 @@ export default function FilterMST({ onChangeModel, onAddModelToList }) {
     ];
     const sizes = [
         { name: '100 см', value: '100' },
-        { name: '120 см', value: '120' },
-        { name: '150 см', value: '150' },
-        { name: '170 см', value: '170' },
-        { name: '200 см', value: '200' },
+        { name: '140 см', value: '140' },
+        { name: '180 см', value: '180' },
+        { name: '220 см', value: '220' },
+        { name: '250 см', value: '250' },
     ];
     const types = [
-        { name: 'Стандарт', value: 'u' },
+        { name: 'Стандарт', value: 'standard' },
         { name: 'Православные', value: 'orthodox' },
         { name: 'Мусульманские', value: 'muslim' },
     ];

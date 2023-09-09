@@ -76,15 +76,24 @@ const CustomAccordionItem = ({ model, index, activeKey, doSet, FILTERED_MODELS, 
 export const CustomAccordion = ({ onChangeModel, activeKey, doSet, onAddModelToList, material, size, type }) => {
 
     const FILTERED_MODELS = {}
-    // console.log('settings: ', material, size, type)
+    console.log('settings: ', material, size, type)
     Object.keys(MODELS).forEach(model => {
         FILTERED_MODELS[model] = [];
         MODELS[model].forEach(elem => {
-            if (((elem.name.includes('[u_') || elem.name.includes(`[${material}_`))
-                && (elem.name.includes('_u_') || elem.name.includes(`_${size}_`))
-                && (elem.name.includes('_u]') || elem.name.includes(`_${type}]`)))
-                || (!elem.name.includes('['))) {
-                FILTERED_MODELS[model].push(elem);
+            if (type === 'standard') {
+                if (((elem.name.includes('[u_') || elem.name.includes(`[${material}_`))
+                    && (elem.name.includes('_u_') || elem.name.includes(`_${size}_`)))
+                    || (!elem.name.includes('['))) {
+                    FILTERED_MODELS[model].push(elem);
+                }
+            }
+            else {
+                if (((elem.name.includes('[u_') || elem.name.includes(`[${material}_`))
+                    && (elem.name.includes('_u_') || elem.name.includes(`_${size}_`))
+                    && (elem.name.includes('_u') || elem.name.includes(`_${type}]`)))
+                    || (!elem.name.includes('['))) {
+                    FILTERED_MODELS[model].push(elem);
+                }
             }
         });
     })
