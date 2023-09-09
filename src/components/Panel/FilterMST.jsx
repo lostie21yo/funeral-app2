@@ -21,7 +21,7 @@ const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel,
                     onChange={(e) => {
                         doSet(e.currentTarget.value)
                         onChangeModel('');
-                        onAddModelToList(0, '', true);
+                        // onAddModelToList(0, '', true);
                     }}
                 >
                     {radio.name}
