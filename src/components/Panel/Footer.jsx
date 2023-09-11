@@ -5,27 +5,19 @@ import { CustomModal } from "../Modal/CustomModal";
 
 export const Footer = ({ modelList }) => {
 
-    // const [modalShow, setModalShow] = React.useState(false);
-
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => {setShow(true); showProductList(modelList)};
 
-    const [productList, setProductList] = useState(new Set())
+    var productList = new Set()
 
     const showProductList = (modelList) => {
-
+        productList.clear()
         Object.values(modelList).map((product) => (
-            !product.includes('Не выбрано') ? productList.add(product) : null
+            (!product.includes('Не выбрано') && product.includes('.glb')) ? productList.add(product) : null
         ))
-        var isEmpty = true;
-        if (productList.length > 0) {
-            isEmpty = false;
-        }
         console.log(productList)
-        
-        setProductList(productList);
       };
 
     return (

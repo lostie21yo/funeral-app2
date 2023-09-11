@@ -13,7 +13,7 @@ const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel,
                     key={`${variant}-${idx}`}
                     id={`${variant}-${idx}`}
                     type="radio"
-                    {...console.log(radio)}
+                    // {...console.log(radio)}
                     variant={variant}
                     name={`${radio}`}
                     value={radio.value}

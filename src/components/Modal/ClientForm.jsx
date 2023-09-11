@@ -7,7 +7,7 @@ function validateNumber(value) {
     let error;
     if (!value) {
         error = "Обязательное поле";
-    } else if (!/^[\+0-9]{10,12}$/i.test(value)) {
+    } else if(!/^[+0-9]{10,12}$/i.test(value)) {
         error = "Неверный номер";
     }
     return error;
@@ -35,6 +35,9 @@ function validateName(value) {
 }
 
 const ListOfProducts = ({ productList }) => {
+
+    console.log(productList)
+    console.log(productList.size)
 
     return (
         <div>

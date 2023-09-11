@@ -88,9 +88,12 @@ export const CustomAccordion = ({ onChangeModel, activeKey, doSet, onAddModelToL
                 }
             }
             else {
+                // console.log('1 material', elem.name.includes('[u_') || elem.name.includes(`[${material}_`))
+                // console.log('2 size', elem.name.includes('_u_') || elem.name.includes(`_${size}_`))
+                // console.log('3 type', elem.name.includes('_u') || elem.name.includes(`_${type}]`))
                 if (((elem.name.includes('[u_') || elem.name.includes(`[${material}_`))
                     && (elem.name.includes('_u_') || elem.name.includes(`_${size}_`))
-                    && (elem.name.includes('_u') || elem.name.includes(`_${type}]`)))
+                    && (elem.name.includes('_u]') || elem.name.includes(`_${type}]`)))
                     || (!elem.name.includes('['))) {
                     FILTERED_MODELS[model].push(elem);
                 }
