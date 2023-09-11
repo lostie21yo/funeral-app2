@@ -80,20 +80,29 @@ const ColorRadioButtons = ({ list, setting, doSet, def, index }) => {
 
 
 export const FilterCH = ({ files, name, onChangeModel, classIndex, onAddModelToList, colorSet, heightSet }) => {
-
-    const [color, setColor] = useState('black')
+    
+    var defColor;
+    // console.log(colorSet[0][name])
+    colorSet.length > 0 ? defColor = colorSet[0]['name'] : defColor = 'black'
+    console.log('def', defColor)
+    const [color, setColor] = useState(defColor)
     const [height, setHeight] = useState(100)
-
+    
+    var isFirstIteration = true
     var filtered_files = new Set()
     files.forEach(model => {
         if ((model.name.includes(`${color})`)) || (!model.name.includes('('))) {
             filtered_files.add(model);
+            if (isFirstIteration) defColor = color
         }
         if ((model.name.includes(`(${height}`)) || (!model.name.includes('('))) {
             filtered_files.add(model);
+            // setHeight(height)
         }
     })
     filtered_files = Array.from(filtered_files)
+
+
 
     return (
         <>
