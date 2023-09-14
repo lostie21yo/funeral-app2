@@ -10,14 +10,14 @@ export const Footer = ({ modelList }) => {
     const handleClose = () => setShow(false);
     const handleShow = () => {setShow(true); showProductList(modelList)};
 
-    var productList = new Set()
+    const [productList, setProductList] = useState(new Set())
 
     const showProductList = (modelList) => {
         productList.clear()
         Object.values(modelList).map((product) => (
             (!product.includes('Не выбрано') && product.includes('.glb')) ? productList.add(product) : null
         ))
-        console.log(productList)
+        setProductList(productList)
       };
 
     return (
