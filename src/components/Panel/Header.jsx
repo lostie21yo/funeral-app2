@@ -1,7 +1,6 @@
 import React from "react";
 import { Navbar, Container } from "react-bootstrap";
 
-
 export const Header = () => {
 
     return (

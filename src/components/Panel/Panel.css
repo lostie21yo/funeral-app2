@@ -36,7 +36,7 @@
   height: 60%;
   flex: 1 0 auto;
   flex-wrap: wrap;
-  border: 2px solid #21252900;
+  border: 1px solid #21252900;
 }
 
 .scrollbar-primary {
@@ -63,7 +63,6 @@
   right: 0%;
   text-align: center;
   color: white;
-  /* border: 1px solid blue; */
   background-color: #2b3035;
 }
 
@@ -77,28 +76,27 @@
 .btn-image {
   height: 100%;
   object-fit: contain;
-  /* position: absolute; */
-  /* right: 0%; */
 }
 
 .gradient {
-	position: absolute;
+  position: absolute;
   height: 100%;
   right: 0px;
-	line-height: 0;
+  line-height: 0;
   /* width: 300px; */
 }
+
 .gradient:after {
-	content: "";
-	display: block;    
-	width: 100%;
-	height: 100%;    
-	position: absolute;
-	top: 0;      
-	left: 0;   
-	background: transparent;
-	background-image: linear-gradient(to right, #2b3035, #0000001e);
-	opacity: 1;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  background-image: linear-gradient(to right, #2b3035, #0000001e);
+  opacity: 1;
 }
 
 /* COLOR & HEIGHT FILTER */
@@ -108,12 +106,14 @@
   justify-content: space-around;
   align-items: center
 }
+
 .height-toggle-button {
   --bs-btn-border-radius: 20px;
   border-radius: 5px;
   padding: 0px;
   /* margin-right: 5px; */
 }
+
 .color-toggle-button {
   --bs-btn-border-radius: 20px;
   border-radius: 5px;
@@ -130,20 +130,21 @@
   align-items: center;
 }
 
-.toggle-btn-container {
-  /* justify-content: center; */
+.price-badge {
   display: flex;
-  position: relative;
-}
-
-.badge {
-  height: 23px;
+  align-items: center;
+  justify-content: space-between;
+  height: 25px;
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 2px 6px;
+  color: black;
 }
 
 
 /* FOOTER */
 .footer {
-  background-color: rgb(43,48,53);
+  background-color: rgb(43, 48, 53);
   color: white;
 }
 

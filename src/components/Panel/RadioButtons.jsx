@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { ToggleButton, Badge, ToggleButtonGroup } from "react-bootstrap";
+import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import "./Panel.css";
+import PRICES from "../../assets/prices.json";
 
 export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddModelToList }) => {
 
     var replacement = ''
     if (['1_Облицовка'].includes(name)) {
         replacement = `Не выбрано.glb`
-
     }
 
     files.forEach((file) => {
@@ -46,7 +46,7 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
 
             {files.map((file, index) => (
                 <ToggleButton
-                    style={{ width: "100%", display: "flex", justifyContent: "space-between" }}
+                    style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: 'center' }}
                     key={index}
                     id={`${file.name + index}`}
                     variant='outline-success'
@@ -57,16 +57,17 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
                         if (typeof file.name !== 'undefined') {
                             onChangeModel(file.path.split("public/")[1] + "/" + file.name);
                             onAddModelToList(classIndex, file.path.split("public/")[1] + "/" + file.name);
-                            // console.log(file.path.split("public/")[1] + "/" + file.name)
                         }
                     }
                     }
                 >
                     {/* {file.name.split('[')[0].replace('.glb', '')} */}
-                    {file.name}
-
-                    <Badge pill bg="info" className='badge'>Price</Badge>
-
+                    <div>{file.name}</div>
+                    {/* <div>{Object.keys(PRICES).includes(file.name) ? PRICES[file.name] : 'N/A'}</div> */}
+                    <div className='price-badge'>
+                        {Object.keys(PRICES).includes(file.name) ? PRICES[file.name] : 'N/A'}
+                        <img src="price-logo3.png" alt="" width="20px" style={{ margin: "0 0 0 2px" }}></img>
+                    </div>
                 </ToggleButton>
             ))}
         </ToggleButtonGroup>
