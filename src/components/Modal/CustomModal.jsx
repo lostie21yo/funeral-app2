@@ -16,7 +16,6 @@ export const CustomModal = ({ show, handleClose, productList }) => {
         return dd + '.' + mm + '.' + yy;
     }
     var date = formatDate(new Date());
-    
 
     return (
         <Modal
@@ -24,20 +23,20 @@ export const CustomModal = ({ show, handleClose, productList }) => {
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
-            size='xl'
+            style={{"--bs-modal-width": "70%"}}
         >
             <Modal.Header closeButton >
                 <Modal.Title><h4 style={{ margin: "0" }}>Оформление заказа</h4> <h6>{date}</h6></Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <ClientForm productList={productList} key={show} date={date}/>
+                <ClientForm productList={productList} key={show} date={date} handleClose={handleClose}/>
             </Modal.Body>
-            <Modal.Footer>
+            {/* <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                     Закрыть
                 </Button>
                 <Button variant="primary">Подтвердить</Button>
-            </Modal.Footer>
+            </Modal.Footer> */}
         </Modal>
     );
 }

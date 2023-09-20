@@ -15,7 +15,6 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
             delete files[files.indexOf(file)]
         }
     })
-    // console.log(files)
 
     const [radioValue, setRadioValue] = useState(replacement);
     const path = `models/${name}/` + replacement
@@ -66,7 +65,7 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
                     {/* <div>{Object.keys(PRICES).includes(file.name) ? PRICES[file.name] : 'N/A'}</div> */}
                     <div className='price-badge'>
                         {Object.keys(PRICES).includes(file.name) ? PRICES[file.name] : 'N/A'}
-                        <img src="price-logo3.png" alt="" width="20px" style={{ margin: "0 0 0 2px" }}></img>
+                        {Object.keys(PRICES).includes(file.name) ? <img src="price-logo3.png" alt="" width="20px" style={{ margin: "0 0 0 2px" }}></img> : null}
                     </div>
                 </ToggleButton>
             ))}

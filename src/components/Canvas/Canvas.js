@@ -12,7 +12,7 @@ function FullScreenTgl() {
   // const [icon, setIcon] = useState('fs-icon2.png')
 
   let doc = document, elm = doc.getElementById("canvas");
-  
+
   if (elm.requestFullscreen) {
     (!doc.fullscreenElement ? elm.requestFullscreen() : doc.exitFullscreen())
   }
@@ -35,17 +35,16 @@ export const CanvasComponent = ({ currentModel, modelList }) => {
   return (
     <div className={"canvas"} id="canvas">
       <Suspense fallback={<div className={"fallback"}><Spinner animation="border" variant="light" /> Loading...</div>}>
-      <img src="fullscreen.svg" alt="FS" onClick={FullScreenTgl} className="fs-toggle" />
+        <img src="fullscreen.svg" alt="FS" onClick={FullScreenTgl} className="fs-toggle" />
         <Canvas shadows
           onDoubleClick={FullScreenTgl}
           onCreated={() => console.log("Canvas rendered")}
-          camera={{ fov: 75, position: [2.5, 1.3, -1.25] }}>
+          camera={{ fov: 75, position: [2.2, 1.3, -1.25] }}>
           <directionalLight intensity={0.7} castShadow />
-          
+
           <pointLight intensity={1} position={[10, 10, 10]} />
           <OrbitControls target={[0, 0.2, 0]} maxPolarAngle={Math.PI * 0.49}
             maxDistance={7} enableDamping={true} />
-          {/* <fog attach="fog" args={["#d0d0d0", 5, 20]} /> */}
           <Terrain />
           <ModelConstructor castShadow receiveShadow modelList={modelList} />
           <Environment path="/hdr/" files="lilienstein_2k.hdr" background />
