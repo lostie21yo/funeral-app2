@@ -6,7 +6,7 @@ import PRICES from "../../assets/prices.json";
 export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddModelToList }) => {
 
     var replacement = ''
-    if (['1_Облицовка'].includes(name)) {
+    if (['01_Брусчатка'].includes(name)) {
         replacement = `Не выбрано.glb`
     }
 

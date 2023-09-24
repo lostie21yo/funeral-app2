@@ -46,7 +46,7 @@ export default function FilterMST({ onChangeModel, onAddModelToList }) {
         { name: '140 см', value: '140' },
         { name: '180 см', value: '180' },
         { name: '220 см', value: '220' },
-        { name: '250 см', value: '250' },
+        { name: '240 см', value: '240' },
     ];
     const types = [
         { name: 'Стандарт', value: 'standard' },

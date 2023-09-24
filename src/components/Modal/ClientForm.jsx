@@ -2,8 +2,11 @@ import React from "react";
 import "./forms.css";
 import { Formik, Form, Field } from "formik";
 import { ListOfProducts } from "./ListOfProducts";
-import PRICES from "../../assets/prices.json";
 import { Button } from 'react-bootstrap';
+
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 function validateNumber(value) {
     let error;
@@ -46,16 +49,43 @@ function validateDate(value) {
 }
 
 
-export const ClientForm = ({ productList, date, handleClose }) => {
+export const ClientForm = ({ productList, productListNames, date, total, handleClose, PRICES, MakeName }) => {
+    
+    const PDFobject = productList.map(product => [{ text : MakeName(product) }])
 
-    var total = 0;
-    productList = Array.from(productList)
-    productList.forEach((product) => {
-        product = product.split('/').at(-1)
-        if (Object.keys(PRICES).includes(product)) {
-            total = total + PRICES[product];
-        } else total = total + 0
-    })
+    var pdfdoc = {
+        info: {
+            title: 'Тестовый PDF',
+            author: 'admin',
+            subject: 'order',
+            keywords: 'some key words'
+        },
+        pageSize: 'A4',
+        pageOrientation: 'portrait',
+        pageMargins: [20, 20, 20, 20],
+        fontSize: 14,
+        header: function (currentPage, pageCount) {
+            return {
+                text: currentPage.toString() + '/' + pageCount.toString(),
+                alignment: 'right',
+                margin: [0, 30, 10, 50]
+            }
+        },
+        content: [
+            PDFobject
+        ],
+        footer: [
+            {
+                text: total,
+                alignment: 'center',
+            }
+        ]
+    }
+
+    const createPDF = () => {
+        const pdfGenerator = pdfMake.createPdf(pdfdoc, null, null, pdfFonts.pdfMake.vfs).open();
+        // pdfMake.createPdf(pdfdoc).download('name.pdf');
+    }
 
     return (
         <div>
@@ -77,7 +107,7 @@ export const ClientForm = ({ productList, date, handleClose }) => {
                 onSubmit={(values) => {
                     // same shape as initial values
                     console.log(values);
-                    alert('Данные успешно сохранены!')
+                    // alert('Данные успешно сохранены!')
                 }}
             >
 
@@ -107,7 +137,7 @@ export const ClientForm = ({ productList, date, handleClose }) => {
                             </div>
                         </div>
 
-                        <div className="field-line" style={{margin: "0 0 20px 0"}}>
+                        <div className="field-line" style={{ margin: "0 0 20px 0" }}>
                             <div style={{ width: "40%" }}>
                                 <span className="form-label">Контактный телефон</span>
                                 <Field className="form-field form-input" name="number" autoComplete="off"
@@ -172,7 +202,7 @@ export const ClientForm = ({ productList, date, handleClose }) => {
                         <div style={{ borderRadius: '4px', border: '1px solid #5c5c5c' }}>
                             <span className="form-label">Выбранные позиции:</span>
                             <div className="order-details">
-                                <ListOfProducts productList={productList} PRICES={PRICES} />
+                                <ListOfProducts productList={productList} PRICES={PRICES} MakeName={MakeName}/>
                                 {total !== 0 &&
                                     <div className="total">
                                         <span style={{ margin: "0 5px" }}>Итого, руб:</span> <span className="price">{total}</span>
@@ -189,7 +219,7 @@ export const ClientForm = ({ productList, date, handleClose }) => {
                             <Button variant="secondary" style={{ margin: "0 5px" }} onClick={handleClose}>
                                 Отмена
                             </Button>
-                            <Button variant="primary" style={{ margin: "0 5px" }} type="submit">
+                            <Button variant="primary" style={{ margin: "0 5px" }} type="submit" onClick={createPDF}>
                                 Подтвердить
                             </Button>
                         </div>

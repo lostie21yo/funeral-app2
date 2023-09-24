@@ -33,7 +33,7 @@ function FullScreenTgl() {
 export const CanvasComponent = ({ currentModel, modelList }) => {
 
   return (
-    <div className={"canvas"} id="canvas">
+    <div className="canvas" id="canvas">
       <Suspense fallback={<div className={"fallback"}><Spinner animation="border" variant="light" /> Loading...</div>}>
         <img src="fullscreen.svg" alt="FS" onClick={FullScreenTgl} className="fs-toggle" />
         <Canvas shadows

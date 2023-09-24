@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import { CustomModal } from "../Modal/CustomModal";
-import html2canvas from "html2canvas";
+import * as THREE from 'three';
+// import html2canvas from "html2canvas";
 import { saveAs } from "file-saver";
 
 export const Footer = ({ modelList }) => {
@@ -10,6 +11,17 @@ export const Footer = ({ modelList }) => {
     const handleClose = () => setShow(false);
     const handleShow = () => { setShow(true); showProductList(modelList); takeIFrameScreenshot("canvas") };
 
+    const saveBlob = (function () {
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.style.display = 'none';
+        return function saveData(blob, fileName) {
+            const url = window.URL.createObjectURL(blob);
+            a.href = url;
+            a.download = fileName;
+            a.click();
+        };
+    }());
 
     const [productList, setProductList] = useState(new Set())
 
@@ -21,10 +33,32 @@ export const Footer = ({ modelList }) => {
         setProductList(productList)
     };
 
-    const takeIFrameScreenshot = (iframeId) => {
+    const takeIFrameScreenshot = (elementName) => {
 
-        // var canvas = document.getElementById("canvas");
-        // var canvas = document.getElementById("canvas");
+        var canvas = document.getElementsByTagName(elementName)[0];
+
+        const renderer = new THREE.WebGLRenderer({
+            canvas,
+            preserveDrawingBuffer: true,
+            alpha: true,
+        })
+
+        // render()
+        // canvas.toBlob((blob) => {
+        //     saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
+        // });
+
+        // canvas.toBlob((blob) => {
+        //     saveAs(blob, "pretty image.jpg");
+        // });
+
+
+
+
+        // var ctx = canvas.getContext('2d');
+        // console.log(ctx)
+        // ctx.drawWindow(...);
+
 
         // canvas.toBlob(function (blob) {
         //     var newImg = document.createElement("img"),
@@ -39,10 +73,7 @@ export const Footer = ({ modelList }) => {
         //     document.body.appendChild(newImg);
         // });
 
-        // var canvas = document.getElementById("canvas");
-        // canvas.toBlob((blob) => {
-        //     // saveAs(blob, "pretty image.jpg");
-        // });
+        
 
 
         // html2canvas(document.querySelector(`#${iframeId}`)).then(canvas => {
@@ -53,7 +84,7 @@ export const Footer = ({ modelList }) => {
 
         // const canvas = document.getElementById(iframeId);
 
-        // const ctx = canvas.getContext('2d');
+        // const ctx = canvas.('2d');
         // ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height);
 
         // const screenshot = canvas.toDataURL();
