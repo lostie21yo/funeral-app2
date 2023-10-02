@@ -37,13 +37,14 @@ export const CustomModal = ({ show, handleClose, productList }) => {
         if (/\((\d+)/.test(product)) {
             features.push(`высота ${product.match(/\((\d+)/)[1]} см`);
         }
-        if (/(\w+)\)/.test(product)) {
-            features.push(`цвет ${product.match(/(\w+)\)/)[1]}`);
+        if (/([a-zA-Z]+)\)/.test(product)) {
+            features.push(`цвет ${product.match(/([a-zA-Z]+)\)/)[1]}`);
         }
-        let name = `- ${product.match(/^(.+) \[/i)[1]} ${features.length > 0
-                            ? '(' + features.map(elem => {
-                                return features.indexOf(elem) === 0 ? elem : ' ' + elem }) + ')'
-                            : ''}`
+        let name = `${product.match(/^(.+) \[/i)[1]} ${features.length > 0
+            ? '(' + features.map(elem => {
+                return features.indexOf(elem) === 0 ? elem : ' ' + elem
+            }) + ')'
+            : ''}`
         return name.replace('\n', '')
     }
 
@@ -56,10 +57,15 @@ export const CustomModal = ({ show, handleClose, productList }) => {
             style={{ "--bs-modal-width": "70%" }}
         >
             <Modal.Header closeButton >
-                <Modal.Title><h4 style={{ margin: "0" }}>Оформление заказа</h4> <h6>{date}</h6></Modal.Title>
+                <Modal.Title>
+                    <h4 style={{ margin: "0", display: 'flex', alignItems: 'center' }}>
+                        Оформление заказа
+                    </h4>
+                    <h6>{date}</h6>
+                </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <ClientForm productList={productList} key={show} total={total} date={date} 
+                <ClientForm productList={productList} key={show} total={total} date={date}
                     PRICES={PRICES} handleClose={handleClose} MakeName={MakeName}/>
             </Modal.Body>
             {/* <Modal.Footer>

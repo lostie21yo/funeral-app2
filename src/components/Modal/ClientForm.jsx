@@ -48,42 +48,113 @@ function validateDate(value) {
     return error;
 }
 
-
-export const ClientForm = ({ productList, productListNames, date, total, handleClose, PRICES, MakeName }) => {
-    
-    const PDFobject = productList.map(product => [{ text : MakeName(product) }])
-
-    var pdfdoc = {
-        info: {
-            title: 'Тестовый PDF',
-            author: 'admin',
-            subject: 'order',
-            keywords: 'some key words'
-        },
-        pageSize: 'A4',
-        pageOrientation: 'portrait',
-        pageMargins: [20, 20, 20, 20],
-        fontSize: 14,
-        header: function (currentPage, pageCount) {
-            return {
-                text: currentPage.toString() + '/' + pageCount.toString(),
-                alignment: 'right',
-                margin: [0, 30, 10, 50]
-            }
-        },
-        content: [
-            PDFobject
-        ],
-        footer: [
-            {
-                text: total,
-                alignment: 'center',
-            }
-        ]
+function validateOrderNumber(value) {
+    let error;
+    if (!value) {
+        error = "Обязательное поле";
+    } else if (!/^(\d{1,6})$/.test(value)) {
+        error = "Неверный формат";
     }
+    return error;
+}
 
-    const createPDF = () => {
-        const pdfGenerator = pdfMake.createPdf(pdfdoc, null, null, pdfFonts.pdfMake.vfs).open();
+export const ClientForm = ({ productList, date, total, handleClose, PRICES, MakeName }) => {
+
+    const createPDF = (values) => {
+
+        const pdfName = `Заказ ${values['order_number']} от ${values['order_date']}`
+
+        var pdfdoc = {
+            info: {
+                title: pdfName,
+                author: 'funeral-app',
+                subject: 'order',
+                keywords: 'some key words'
+            },
+            pageSize: 'A4',
+            pageOrientation: 'portrait',
+            pageMargins: [50, 50, 50, 50],
+            fontSize: 10,
+            header: { text: 'Ритуал журнал', alignment: 'center', margin: [0, 16, 0, 16] },
+            content: [
+                {
+                    text: pdfName,
+                    style: 'header',
+                    alignment: 'center'
+                },
+                '\n',
+                { text: 'Данные заказчика', fontSize: 16, bold: true, margin: [20, 0, 0, 8] },
+                {
+                    style: 'tableExample',
+                    table: {
+                        widths: [150, 330],
+                        body: [
+                            ['Дата заказа', values['order_date']],
+                            ['', ''],
+                            ['ФИО заказчика', values['customer_secondname'] + ' '
+                                + values['customer_firstname'] + ' '
+                                + values['customer_surname']],
+                            ['Электронная почта', values['email']],
+                            ['Контактный телефон', values['number']],
+                            ['', ''],
+                            ['ФИО на памятнике', values['monument_secondname'] + ' '
+                                + values['monument_firstname'] + ' '
+                                + values['monument_surname']],
+                            ['Дата рождения', values['birth_date']],
+                            ['Дата смерти', values['death_date']],
+                            ['', ''],
+                            ['Комментарий', values['comment']]
+                        ],
+                    },
+                    layout: 'noBorders'
+                },
+
+                '\n',
+                { text: 'Детали заказа', fontSize: 16, bold: true, margin: [20, 0, 0, 8] },
+                {
+                    style: 'tableExample',
+                    table: {
+                        widths: [400, 80],
+                        body:
+                            productList.map(product => [
+                                `${MakeName(product)}`,
+                                Object.keys(PRICES).includes(product) ? PRICES[product] : 'N/A'
+                            ]),
+                    },
+                    layout: {
+                        hLineWidth: function (i, node) {
+                            return 1;
+                        },
+                        vLineWidth: function (i, node) {
+                            return 1;
+                        },
+                        hLineColor: function (i, node) {
+                            return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
+                        },
+                        vLineColor: function (i, node) {
+                            return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
+                        },
+                    }
+                },
+                { text: `Итоговая стоимость продукции: ${total} руб.`, fontSize: 12, margin: [0, 30, 0, 8], color: 'black' },
+
+            ],
+            footer: [
+                { text: 'Ритуал журнал', alignment: 'center', margin: [0, 16, 0, 16] },
+            ],
+            styles: {
+                header: {
+                    fontSize: 20,
+                    bold: true,
+                    alignment: 'justify'
+                },
+                tableExample: {
+                    margin: [0, 5, 0, 15]
+                },
+            },
+        }
+
+        const pdfGenerator = pdfMake.createPdf(pdfdoc, null, null, pdfFonts.pdfMake.vfs).download(pdfName + '.pdf');
         // pdfMake.createPdf(pdfdoc).download('name.pdf');
     }
 
@@ -102,12 +173,14 @@ export const ClientForm = ({ productList, productListNames, date, total, handleC
                     monument_surname: "Alive",
                     birth_date: "04.04.2000",
                     death_date: "05.05.2500",
-                    comment: "there is nothing to comment"
+                    comment: "there is nothing to comment",
+                    order_number: ""
                 }}
                 onSubmit={(values) => {
                     // same shape as initial values
-                    console.log(values);
-                    // alert('Данные успешно сохранены!')
+                    // console.log(values);
+                    if (productList.length > 0) createPDF(values) 
+                    else alert("Оформление заказа невозможно.\nНи одна позиция не была выбрана!")
                 }}
             >
 
@@ -194,15 +267,30 @@ export const ClientForm = ({ productList, productListNames, date, total, handleC
                             <div className="input-group" >
                                 <Field className="form-field form-input" name="comment"
                                     component="textarea" rows="2"></Field>
-                                {/* <textarea className="form-input" name="comment" aria-label="comment"></textarea> */}
                             </div>
                         </div>
 
-                        <h5 style={{ textAlign: 'center', margin: '16px 0 8px 0' }}>Детали заказа</h5>
-                        <div style={{ borderRadius: '4px', border: '1px solid #5c5c5c' }}>
+                        <div style={{ display: "flex", width: '100%', flexDirection: "column", alignItems: "center" }}>
+                            <div style={{
+                                display: "flex", width: '100%', justifyContent: "center",
+                                alignItems: "center", margin: '16px 0 8px 0', fontSize: "20px"
+                            }}>
+                                <h5 style={{ textAlign: 'center', margin: "0" }}>
+                                    Детали заказа №
+                                </h5>
+                                <div style={{ width: "65px", margin: "0 2% 0 0", display: "flex" }}>
+                                    <Field style={{ padding: "0px 2px", fontSize: "18px" }}
+                                        className="form-field form-input" name="order_number" autoComplete="off"
+                                        placeholder="000000" validate={validateOrderNumber} />
+                                </div>
+                            </div>
+                            {errors.order_number && touched.order_number && <div className="field-error">{errors.order_number}</div>}
+                        </div>
+
+                        <div style={{ margin: "8px 0", borderRadius: '4px', border: '1px solid #5c5c5c' }}>
                             <span className="form-label">Выбранные позиции:</span>
                             <div className="order-details">
-                                <ListOfProducts productList={productList} PRICES={PRICES} MakeName={MakeName}/>
+                                <ListOfProducts productList={productList} PRICES={PRICES} MakeName={MakeName} />
                                 {total !== 0 &&
                                     <div className="total">
                                         <span style={{ margin: "0 5px" }}>Итого, руб:</span> <span className="price">{total}</span>
@@ -219,7 +307,7 @@ export const ClientForm = ({ productList, productListNames, date, total, handleC
                             <Button variant="secondary" style={{ margin: "0 5px" }} onClick={handleClose}>
                                 Отмена
                             </Button>
-                            <Button variant="primary" style={{ margin: "0 5px" }} type="submit" onClick={createPDF}>
+                            <Button variant="primary" style={{ margin: "0 5px" }} type="submit">
                                 Подтвердить
                             </Button>
                         </div>

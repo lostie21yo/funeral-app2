@@ -3,7 +3,7 @@ import { Container, ToggleButtonGroup } from 'react-bootstrap';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { CustomAccordion } from './CustomAccordion';
 
-const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel, onAddModelToList }) => {
+const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel }) => {
     return (
         <ToggleButtonGroup vertical={true} name={`${setting}-toggle`}
             type='radio' defaultValue={def} style={{height: '100%', display: 'flex'}}>
