@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import { CustomModal } from "../Modal/CustomModal";
-import { useThree } from '@react-three/fiber'
 
 export const Footer = ({ modelList, screenshot }) => {
 

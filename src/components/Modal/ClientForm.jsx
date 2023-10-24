@@ -62,7 +62,9 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
 
     const createPDF = (values) => {
 
-        const pdfName = `Заказ ${values['order_number']} от ${values['order_date']}`
+        const FIO = `${values['customer_secondname']} ${values['customer_firstname'][0]}. ${values['customer_surname'][0]}.`
+
+        const pdfName = `Заказ ${values['order_number']} ${FIO} от ${values['order_date']}`
 
         var isScreenshoted;
         screenshot === "noscreen" ? isScreenshoted = false : isScreenshoted = true
@@ -182,8 +184,8 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
             },
         }
 
-        // pdfMake.createPdf(pdfdoc, null, null, pdfFonts.pdfMake.vfs).download(pdfName + '.pdf');
-        pdfMake.createPdf(pdfdoc, pdfFonts.pdfMake.vfs).open();
+        pdfMake.createPdf(pdfdoc, null, null, pdfFonts.pdfMake.vfs).download(pdfName + '.pdf');
+        // pdfMake.createPdf(pdfdoc, pdfFonts.pdfMake.vfs).open();
     }
 
     return (
@@ -191,17 +193,17 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
             <Formik
                 initialValues={{
                     order_date: date,
-                    customer_secondname: "Very",
-                    customer_firstname: "Good",
-                    customer_surname: "Relative",
-                    email: "immortal@gmail.com",
-                    number: "+79998887766",
-                    monument_secondname: "Everybody",
-                    monument_firstname: "Stay",
-                    monument_surname: "Alive",
-                    birth_date: "04.04.2000",
-                    death_date: "05.05.2500",
-                    comment: "there is nothing to comment",
+                    customer_secondname: "",
+                    customer_firstname: "",
+                    customer_surname: "",
+                    email: "",
+                    number: "",
+                    monument_secondname: "",
+                    monument_firstname: "",
+                    monument_surname: "",
+                    birth_date: "",
+                    death_date: "",
+                    comment: "",
                     order_number: ""
                 }}
                 onSubmit={(values) => {
@@ -220,19 +222,19 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                         <div className="field-line">
                             <div style={{ width: "32%" }}>
                                 <Field className="form-field form-input" autoComplete="off"
-                                    name="customer_secondname" holder="Фамилия" validate={validateName} autoFocus />
+                                    name="customer_secondname" placeholder="Фамилия" validate={validateName} autoFocus />
                                 {errors.customer_secondname && touched.customer_secondname
                                     && <div className="field-error">{errors.customer_secondname}</div>}
                             </div>
                             <div style={{ width: "32%" }}>
                                 <Field className="form-field form-input" autoComplete="off"
-                                    name="customer_firstname" holder="Имя" validate={validateName} />
+                                    name="customer_firstname" placeholder="Имя" validate={validateName} />
                                 {errors.customer_firstname && touched.customer_firstname
                                     && <div className="field-error">{errors.customer_firstname}</div>}
                             </div>
                             <div style={{ width: "32%" }}>
                                 <Field className="form-field form-input" autoComplete="off"
-                                    name="customer_surname" holder="Отчество" validate={validateName} />
+                                    name="customer_surname" placeholder="Отчество" validate={validateName} />
                                 {errors.customer_surname && touched.customer_surname
                                     && <div className="field-error">{errors.customer_surname}</div>}
                             </div>
@@ -242,13 +244,13 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                             <div style={{ width: "40%" }}>
                                 <span className="form-label">Контактный телефон</span>
                                 <Field className="form-field form-input" name="number" autoComplete="off"
-                                    holder="Телефон" validate={validateNumber} />
+                                    placeholder="Телефон" validate={validateNumber} />
                                 {errors.number && touched.number && <div className="field-error">{errors.number}</div>}
                             </div>
                             <div style={{ width: "58%" }}>
                                 <span className="form-label">Электронная почта</span>
                                 <Field className="form-field form-input" name="email" autoComplete="off"
-                                    holder="@" validate={validateEmail} />
+                                    placeholder="@" validate={validateEmail} />
                                 {errors.email && touched.email && <div className="field-error">{errors.email}</div>}
                             </div>
                         </div>
@@ -257,19 +259,19 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                         <div className="field-line">
                             <div style={{ width: "32%" }}>
                                 <Field className="form-field form-input" autoComplete="off"
-                                    name="monument_secondname" holder="Фамилия" validate={validateName} />
+                                    name="monument_secondname" placeholder="Фамилия" validate={validateName} />
                                 {errors.monument_secondname && touched.monument_secondname
                                     && <div className="field-error">{errors.monument_secondname}</div>}
                             </div>
                             <div style={{ width: "32%" }}>
                                 <Field className="form-field form-input" autoComplete="off"
-                                    name="monument_firstname" holder="Имя" validate={validateName} />
+                                    name="monument_firstname" placeholder="Имя" validate={validateName} />
                                 {errors.monument_firstname && touched.monument_firstname
                                     && <div className="field-error">{errors.monument_firstname}</div>}
                             </div>
                             <div style={{ width: "32%" }}>
                                 <Field className="form-field form-input" autoComplete="off"
-                                    name="monument_surname" holder="Отчество" validate={validateName} />
+                                    name="monument_surname" placeholder="Отчество" validate={validateName} />
                                 {errors.monument_surname && touched.monument_surname
                                     && <div className="field-error">{errors.monument_surname}</div>}
                             </div>
@@ -279,13 +281,13 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                             <div style={{ width: "32%", margin: "0 2% 0 0" }}>
                                 <span className="form-label">Дата рождения</span>
                                 <Field className="form-field form-input" name="birth_date" autoComplete="off"
-                                    holder="ДД.ММ.ГГГГ" validate={validateDate} />
+                                    placeholder="ДД.ММ.ГГГГ" validate={validateDate} />
                                 {errors.birth_date && touched.birth_date && <div className="field-error">{errors.birth_date}</div>}
                             </div>
                             <div style={{ width: "32%", margin: "0 2% 0 0" }}>
                                 <span className="form-label">Дата смерти</span>
                                 <Field className="form-field form-input" name="death_date" autoComplete="off"
-                                    holder="ДД.ММ.ГГГГ" validate={validateDate} />
+                                    placeholder="ДД.ММ.ГГГГ" validate={validateDate} />
                                 {errors.death_date && touched.death_date && <div className="field-error">{errors.death_date}</div>}
                             </div>
                         </div>

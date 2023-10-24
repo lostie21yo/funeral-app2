@@ -7,8 +7,7 @@ import { ModelConstructor } from "./ModelConstructor";
 import { Terrain } from "./Terrain";
 import Spinner from 'react-bootstrap/Spinner';
 import { useThree } from '@react-three/fiber'
-import { useControls, button, folder } from 'leva'
-import { Leva } from 'leva'
+import { useControls, button } from 'leva'
 
 function FullScreenTgl() {
   // const [icon, setIcon] = useState('fs-icon2.png')
