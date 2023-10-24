@@ -9,6 +9,7 @@
     "file-saver": "^2.0.5",
     "formik": "^2.4.3",
     "html2canvas": "^1.4.1",
+    "leva": "^0.9.35",
     "mdb-react-ui-kit": "^6.2.0",
     "pdfmake": "^0.2.7",
     "react": "18.2.0",

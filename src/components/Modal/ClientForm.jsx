@@ -58,11 +58,14 @@ function validateOrderNumber(value) {
     return error;
 }
 
-export const ClientForm = ({ productList, date, total, handleClose, PRICES, MakeName }) => {
+export const ClientForm = ({ productList, date, total, handleClose, PRICES, MakeName, screenshot }) => {
 
     const createPDF = (values) => {
 
         const pdfName = `Заказ ${values['order_number']} от ${values['order_date']}`
+
+        var isScreenshoted;
+        screenshot === "noscreen" ? isScreenshoted = false : isScreenshoted = true
 
         var pdfdoc = {
             info: {
@@ -73,17 +76,18 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
             },
             pageSize: 'A4',
             pageOrientation: 'portrait',
-            pageMargins: [50, 50, 50, 50],
+            pageMargins: [40, 40, 40, 40],
             fontSize: 10,
-            header: { text: 'Ритуал журнал', alignment: 'center', margin: [0, 16, 0, 16] },
+            header: { text: 'Ритуал журнал', alignment: 'center', margin: [0, 16, 0, 8] },
             content: [
                 {
                     text: pdfName,
                     style: 'header',
-                    alignment: 'center'
+                    alignment: 'center',
+                    fontSize: 16
                 },
                 '\n',
-                { text: 'Данные заказчика', fontSize: 16, bold: true, margin: [20, 0, 0, 8] },
+                { text: 'Данные заказчика', fontSize: 14, bold: true, margin: [20, 0, 0, 4] },
                 {
                     style: 'tableExample',
                     table: {
@@ -109,8 +113,7 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                     layout: 'noBorders'
                 },
 
-                '\n',
-                { text: 'Детали заказа', fontSize: 16, bold: true, margin: [20, 0, 0, 8] },
+                { text: 'Детали заказа', fontSize: 14, bold: true, margin: [20, 0, 0, 4] },
                 {
                     style: 'tableExample',
                     table: {
@@ -136,12 +139,37 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                         },
                     }
                 },
-                { text: `Итоговая стоимость продукции: ${total} руб.`, fontSize: 12, margin: [0, 30, 0, 8], color: 'black' },
+                {
+                    text: `Итоговая стоимость продукции: ${total} руб.`,
+                    fontSize: 12, margin: [0, 0, 0, 20], color: 'black'
+                },
+                isScreenshoted
+                    ? { image: screenshot, fit: [400, 300], alignment: 'center' }
+                    : { }
 
             ],
-            footer: [
-                { text: 'Ритуал журнал', alignment: 'center', margin: [0, 16, 0, 16] },
-            ],
+            function() {
+                console.log(screenshot)
+                if (screenshot !== "noscreen") {
+                    return {
+                        image: screenshot,
+                        fit: [400, 300],
+                        alignment: 'center'
+                    }
+                }
+            },
+
+
+            // footer: function () {
+            //     if (screenshot !== "empty screen base64") {
+            //         return {
+            //             image: screenshot,
+            //             fit: [400, 300],
+            //             alignment: 'center'
+            //         }
+            //     }
+            // },
+
             styles: {
                 header: {
                     fontSize: 20,
@@ -154,8 +182,8 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
             },
         }
 
-        const pdfGenerator = pdfMake.createPdf(pdfdoc, null, null, pdfFonts.pdfMake.vfs).download(pdfName + '.pdf');
-        // pdfMake.createPdf(pdfdoc).download('name.pdf');
+        // pdfMake.createPdf(pdfdoc, null, null, pdfFonts.pdfMake.vfs).download(pdfName + '.pdf');
+        pdfMake.createPdf(pdfdoc, pdfFonts.pdfMake.vfs).open();
     }
 
     return (
@@ -179,7 +207,7 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                 onSubmit={(values) => {
                     // same shape as initial values
                     // console.log(values);
-                    if (productList.length > 0) createPDF(values) 
+                    if (productList.length > 0) createPDF(values)
                     else alert("Оформление заказа невозможно.\nНи одна позиция не была выбрана!")
                 }}
             >
@@ -297,7 +325,10 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                                     </div>}
                             </div>
                             <div>
-                                <img className="order-photo" src="/rip.jpg" alt="order-screenshot" />
+                                {screenshot === 'noscreen'
+                                    ? <span className="form-label" style={{ color: "orange" }}>Снимок сцены не сделан!</span>
+                                    : <img className="order-photo" src={`${screenshot}`} alt="order-screenshot" />}
+
                             </div>
                         </div>
 

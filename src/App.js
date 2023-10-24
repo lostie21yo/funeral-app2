@@ -12,7 +12,7 @@ function App() {
   };
 
   const [modelList, setModelList] = useState({});
-  if(modelList[0] === undefined) {modelList[0] = 'models/1_Облицовка/Не выбрано.glb'}
+  if (modelList[0] === undefined) { modelList[0] = 'models/1_Облицовка/Не выбрано.glb' }
   // if(modelList[1] === undefined) {modelList[1] = 'models/2_Надгробия/Не выбрано.glb'}
 
 
@@ -28,14 +28,26 @@ function App() {
       // modelList[1] = 'models/2_Надгробия/Не выбрано.glb'
     }
     setModelList(modelList);
+    setScreenshot('noscreen')
   };
 
-  // console.log(modelList)
+  const [screenshot, setScreenshot] = useState('noscreen');
+  const makeScreenshot = (base64) => {
+    setScreenshot(base64)
+  }
+  // console.log(screenshot)
 
   return (
     <>
-      <Panel onChangeModel={handleChangeModel} onAddModelToList={addModelToList} modelList={modelList}/>
-      <CanvasComponent currentModel={currentModel} modelList={modelList} />
+      <Panel onChangeModel={handleChangeModel}
+        onAddModelToList={addModelToList}
+        modelList={modelList}
+        screenshot={screenshot}
+      />
+      <CanvasComponent
+        currentModel={currentModel}
+        modelList={modelList}
+        makeScreenshot={makeScreenshot} />
     </>
   );
 }

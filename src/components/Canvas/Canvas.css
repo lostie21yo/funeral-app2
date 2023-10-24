@@ -27,8 +27,24 @@
     left: 0px;
     bottom: 0px;
     z-index: 99999;
-    background-color: rgba(50, 50, 50, 0 );
-    -moz-user-select: none; 
-    -webkit-user-select: none; 
-    -ms-user-select: none; 
-    user-select: none;}
+    background-color: rgba(50, 50, 50, 0);
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+#leva__root>* {
+    width: 130px;
+    margin-right: 35%;
+    font-size: 14px;
+    padding: 0px;
+    --leva-sizes-rowHeight: 30px;
+  }
+
+button {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+}

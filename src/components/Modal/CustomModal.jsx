@@ -2,7 +2,7 @@ import { Modal } from 'react-bootstrap';
 import { ClientForm } from './ClientForm';
 import PRICES from "../../assets/prices.json";
 
-export const CustomModal = ({ show, handleClose, productList }) => {
+export const CustomModal = ({ show, handleClose, productList, screenshot }) => {
 
     function formatDate(date) {
 
@@ -66,14 +66,8 @@ export const CustomModal = ({ show, handleClose, productList }) => {
             </Modal.Header>
             <Modal.Body>
                 <ClientForm productList={productList} key={show} total={total} date={date}
-                    PRICES={PRICES} handleClose={handleClose} MakeName={MakeName}/>
+                    PRICES={PRICES} handleClose={handleClose} MakeName={MakeName} screenshot={screenshot}/>
             </Modal.Body>
-            {/* <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Закрыть
-                </Button>
-                <Button variant="primary">Подтвердить</Button>
-            </Modal.Footer> */}
         </Modal>
     );
 }

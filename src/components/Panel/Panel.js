@@ -6,14 +6,14 @@ import { Footer } from "./Footer";
 import FilterMST from "./FilterMST";
 
 
-export const Panel = ({ onChangeModel, onAddModelToList, modelList }) => {
+export const Panel = ({ onChangeModel, onAddModelToList, modelList, screenshot }) => {
   
   return (
     <div className={"panel"}>
       <Header />
       <FilterMST onChangeModel={onChangeModel}
         onAddModelToList={onAddModelToList} />
-      <Footer modelList={modelList} />
+      <Footer modelList={modelList} screenshot={screenshot}/>
     </div>
   );
 };
