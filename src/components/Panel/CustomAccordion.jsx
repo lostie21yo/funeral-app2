@@ -80,7 +80,7 @@ export const CustomAccordion = ({ onChangeModel, activeKey, doSet, onAddModelToL
         FILTERED_MODELS[model] = [];
         MODELS[model].forEach(elem => {
             // if (type === 'standard') {
-            //     if (size !== '240') {
+            //     if (size !== '2') {
             //         if (((elem.name.includes('[u_') || elem.name.includes(`[${material}_`))
             //             && (elem.name.includes('_u_') || elem.name.includes(`_${size}_`)))
             //             || (!elem.name.includes('['))) {
@@ -96,7 +96,7 @@ export const CustomAccordion = ({ onChangeModel, activeKey, doSet, onAddModelToL
             //     }
             // }
             // else {
-            if (size !== '240') {
+            if (size !== '2') {
                 if (((elem.name.includes('[u_') || elem.name.includes(`[${material}_`))
                     && (elem.name.includes('_u_') || elem.name.includes(`_${size}_`))
                     && (elem.name.includes('_u]') || elem.name.includes(`_${type}]`)))

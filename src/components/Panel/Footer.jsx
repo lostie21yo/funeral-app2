@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import { CustomModal } from "../Modal/CustomModal";
 
-export const Footer = ({ modelList, screenshot }) => {
+export const Footer = ({ modelList, screenshot, FIOcount }) => {
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -33,7 +33,8 @@ export const Footer = ({ modelList, screenshot }) => {
                 show={show}
                 handleClose={handleClose}
                 productList={productList}
-                screenshot={screenshot} />
+                screenshot={screenshot} 
+                FIOcount={FIOcount}/>
         </>
     );
 };

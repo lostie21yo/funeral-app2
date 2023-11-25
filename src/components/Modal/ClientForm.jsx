@@ -18,15 +18,15 @@ function validateNumber(value) {
     return error;
 }
 
-function validateEmail(value) {
-    let error;
-    if (!value) {
-        error = "Обязательное поле";
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
-        error = "Неверный почтовый адрес";
-    }
-    return error;
-}
+// function validateEmail(value) {
+//     let error;
+//     if (!value) {
+//         error = "Обязательное поле";
+//     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+//         error = "Неверный почтовый адрес";
+//     }
+//     return error;
+// }
 
 function validateName(value) {
     let error;
@@ -58,7 +58,31 @@ function validateOrderNumber(value) {
     return error;
 }
 
-export const ClientForm = ({ productList, date, total, handleClose, PRICES, MakeName, screenshot }) => {
+export const ClientForm = ({ productList, date, total, handleClose, PRICES, MakeName, screenshot, FIOcount }) => {
+
+    var initial = {
+        order_date: date,
+        customer_secondname: "Кто",
+        customer_firstname: "Заказал",
+        customer_surname: "Могилку",
+        // email: "",
+        number: "+79998887766",
+        monument_secondname1: "Сомбади",
+        monument_firstname1: "Покинул",
+        monument_surname1: "Мир",
+        birth_date1: "0.0.0000",
+        death_date1: "31.12.3000",
+        comment: "Печаль чо",
+        order_number: ""
+    }
+    if (FIOcount === "2") {
+        initial['monument_secondname2'] = "Неужели"
+        initial['monument_firstname2'] = "Еще"
+        initial['monument_surname2'] = "Второй"
+        initial['birth_date2'] = "14.11.2000"
+        initial['death_date2'] = "14.10.2500"
+    }
+    console.log(initial)
 
     const createPDF = (values) => {
 
@@ -68,6 +92,31 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
 
         var isScreenshoted;
         screenshot === "noscreen" ? isScreenshoted = false : isScreenshoted = true
+
+        var data = [
+            ['Дата заказа', values['order_date']],
+            ['', ''],
+            ['ФИО заказчика', values['customer_secondname'] + ' '
+                + values['customer_firstname'] + ' '
+                + values['customer_surname']],
+            // ['Электронная почта', values['email']],
+            ['Контактный телефон', values['number']],
+            ['', ''],
+            ['ФИО на памятнике 1', values['monument_secondname1'] + ' '
+                + values['monument_firstname1'] + ' '
+                + values['monument_surname1']],
+            ['Дата рождения', values['birth_date1']],
+            ['Дата смерти', values['death_date1']],
+            ['', '']
+        ]
+        if (FIOcount === "2") {
+            data.push(['ФИО на памятнике 2', values['monument_secondname2'] + ' '
+                + values['monument_firstname2'] + ' ' + values['monument_surname2']])
+            data.push(['Дата рождения', values['birth_date2']])
+            data.push(['Дата смерти', values['death_date2']])
+        }
+        data.push(['', ''])
+        data.push(['Комментарий', values['comment']])
 
         var pdfdoc = {
             info: {
@@ -94,23 +143,7 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                     style: 'tableExample',
                     table: {
                         widths: [150, 330],
-                        body: [
-                            ['Дата заказа', values['order_date']],
-                            ['', ''],
-                            ['ФИО заказчика', values['customer_secondname'] + ' '
-                                + values['customer_firstname'] + ' '
-                                + values['customer_surname']],
-                            ['Электронная почта', values['email']],
-                            ['Контактный телефон', values['number']],
-                            ['', ''],
-                            ['ФИО на памятнике', values['monument_secondname'] + ' '
-                                + values['monument_firstname'] + ' '
-                                + values['monument_surname']],
-                            ['Дата рождения', values['birth_date']],
-                            ['Дата смерти', values['death_date']],
-                            ['', ''],
-                            ['Комментарий', values['comment']]
-                        ],
+                        body: data,
                     },
                     layout: 'noBorders'
                 },
@@ -147,7 +180,7 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                 },
                 isScreenshoted
                     ? { image: screenshot, fit: [400, 300], alignment: 'center' }
-                    : { }
+                    : {}
 
             ],
             function() {
@@ -160,17 +193,6 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                     }
                 }
             },
-
-
-            // footer: function () {
-            //     if (screenshot !== "empty screen base64") {
-            //         return {
-            //             image: screenshot,
-            //             fit: [400, 300],
-            //             alignment: 'center'
-            //         }
-            //     }
-            // },
 
             styles: {
                 header: {
@@ -191,21 +213,7 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
     return (
         <div>
             <Formik
-                initialValues={{
-                    order_date: date,
-                    customer_secondname: "",
-                    customer_firstname: "",
-                    customer_surname: "",
-                    email: "",
-                    number: "",
-                    monument_secondname: "",
-                    monument_firstname: "",
-                    monument_surname: "",
-                    birth_date: "",
-                    death_date: "",
-                    comment: "",
-                    order_number: ""
-                }}
+                initialValues={initial}
                 onSubmit={(values) => {
                     // same shape as initial values
                     // console.log(values);
@@ -216,7 +224,45 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
 
                 {({ errors, touched, isValidating }) => (
                     <Form>
-                        <h5 style={{ textAlign: 'center' }}>Данные заказчика</h5>
+                        <div style={{ display: "flex", width: '100%', flexDirection: "column", alignItems: "center" }}>
+                            <div style={{
+                                display: "flex", width: '100%', justifyContent: "center",
+                                alignItems: "center", margin: '0px 0 8px 0', fontSize: "20px"
+                            }}>
+                                <h5 style={{ textAlign: 'center', margin: "0" }}>
+                                    Детали заказа №
+                                </h5>
+                                <div style={{ width: "65px", margin: "0 2% 0 0", display: "flex" }}>
+                                    <Field style={{ padding: "0px 2px", fontSize: "18px" }}
+                                        className="form-field form-input" name="order_number" autoComplete="off"
+                                        placeholder="000000" validate={validateOrderNumber} />
+                                </div>
+                            </div>
+                            {errors.order_number && touched.order_number && <div className="field-error">{errors.order_number}</div>}
+                        </div>
+
+                        <div style={{ margin: "8px 0", borderRadius: '4px', border: '1px solid #5c5c5c' }}>
+                            <div>
+                                {screenshot === 'noscreen'
+                                    ? <span className="form-label" style={{ color: "orange" }}>Снимок сцены не сделан!</span>
+                                    : <img className="order-photo" src={`${screenshot}`} alt="order-screenshot" />}
+                            </div>
+                            <span className="form-label">Выбранные позиции:</span>
+                            <div className="order-details">
+                                <ListOfProducts productList={productList} PRICES={PRICES} MakeName={MakeName} />
+                                {total !== 0 &&
+                                    <div>
+                                        <div className="total">
+                                            <span style={{ margin: "0 5px" }}>Итого, руб:</span> <span className="price">{total}</span>
+                                        </div>
+                                        <div className="total">
+                                            <span style={{ margin: "0 5px" }}>Предоплата, руб:</span> <span className="price">{total * 0.5}</span>
+                                        </div>
+                                    </div>}
+                            </div>
+                        </div>
+
+                        <h5 style={{ textAlign: 'center', margin: '20px 0 0 0' }}>Данные заказчика</h5>
 
                         <span className="form-label">ФИО заказчика</span>
                         <div className="field-line">
@@ -247,90 +293,100 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                                     placeholder="Телефон" validate={validateNumber} />
                                 {errors.number && touched.number && <div className="field-error">{errors.number}</div>}
                             </div>
-                            <div style={{ width: "58%" }}>
+                            {/* <div style={{ width: "58%" }}>
                                 <span className="form-label">Электронная почта</span>
                                 <Field className="form-field form-input" name="email" autoComplete="off"
                                     placeholder="@" validate={validateEmail} />
                                 {errors.email && touched.email && <div className="field-error">{errors.email}</div>}
-                            </div>
+                            </div> */}
                         </div>
 
-                        <span className="form-label">ФИО на памятнике</span>
+
+                        <span className="form-label">ФИО на памятнике 1</span>
                         <div className="field-line">
                             <div style={{ width: "32%" }}>
                                 <Field className="form-field form-input" autoComplete="off"
-                                    name="monument_secondname" placeholder="Фамилия" validate={validateName} />
-                                {errors.monument_secondname && touched.monument_secondname
-                                    && <div className="field-error">{errors.monument_secondname}</div>}
+                                    name="monument_secondname1" placeholder="Фамилия" validate={validateName} />
+                                {errors.monument_secondname1 && touched.monument_secondname1
+                                    && <div className="field-error">{errors.monument_secondname1}</div>}
                             </div>
                             <div style={{ width: "32%" }}>
                                 <Field className="form-field form-input" autoComplete="off"
-                                    name="monument_firstname" placeholder="Имя" validate={validateName} />
-                                {errors.monument_firstname && touched.monument_firstname
-                                    && <div className="field-error">{errors.monument_firstname}</div>}
+                                    name="monument_firstname1" placeholder="Имя" validate={validateName} />
+                                {errors.monument_firstname1 && touched.monument_firstname1
+                                    && <div className="field-error">{errors.monument_firstname1}</div>}
                             </div>
                             <div style={{ width: "32%" }}>
                                 <Field className="form-field form-input" autoComplete="off"
-                                    name="monument_surname" placeholder="Отчество" validate={validateName} />
-                                {errors.monument_surname && touched.monument_surname
-                                    && <div className="field-error">{errors.monument_surname}</div>}
+                                    name="monument_surname1" placeholder="Отчество" validate={validateName} />
+                                {errors.monument_surname1 && touched.monument_surname1
+                                    && <div className="field-error">{errors.monument_surname1}</div>}
                             </div>
                         </div>
 
                         <div style={{ display: "flex", margin: "0 0 20px 0" }}>
                             <div style={{ width: "32%", margin: "0 2% 0 0" }}>
                                 <span className="form-label">Дата рождения</span>
-                                <Field className="form-field form-input" name="birth_date" autoComplete="off"
+                                <Field className="form-field form-input" name="birth_date1" autoComplete="off"
                                     placeholder="ДД.ММ.ГГГГ" validate={validateDate} />
-                                {errors.birth_date && touched.birth_date && <div className="field-error">{errors.birth_date}</div>}
+                                {errors.birth_date1 && touched.birth_date1 && <div className="field-error">{errors.birth_date1}</div>}
                             </div>
                             <div style={{ width: "32%", margin: "0 2% 0 0" }}>
                                 <span className="form-label">Дата смерти</span>
-                                <Field className="form-field form-input" name="death_date" autoComplete="off"
+                                <Field className="form-field form-input" name="death_date1" autoComplete="off"
                                     placeholder="ДД.ММ.ГГГГ" validate={validateDate} />
-                                {errors.death_date && touched.death_date && <div className="field-error">{errors.death_date}</div>}
+                                {errors.death_date1 && touched.death_date1 && <div className="field-error">{errors.death_date1}</div>}
                             </div>
                         </div>
+
+                        {FIOcount === '2' &&
+                            <div>
+                                <span className="form-label">ФИО на памятнике 2</span>
+                                <div className="field-line">
+                                    <div style={{ width: "32%" }}>
+                                        <Field className="form-field form-input" autoComplete="off"
+                                            name="monument_secondname2" placeholder="Фамилия" validate={validateName} />
+                                        {errors.monument_secondname2 && touched.monument_secondname2
+                                            && <div className="field-error">{errors.monument_secondname2}</div>}
+                                    </div>
+                                    <div style={{ width: "32%" }}>
+                                        <Field className="form-field form-input" autoComplete="off"
+                                            name="monument_firstname2" placeholder="Имя" validate={validateName} />
+                                        {errors.monument_firstname2 && touched.monument_firstname2
+                                            && <div className="field-error">{errors.monument_firstname2}</div>}
+                                    </div>
+                                    <div style={{ width: "32%" }}>
+                                        <Field className="form-field form-input" autoComplete="off"
+                                            name="monument_surname2" placeholder="Отчество" validate={validateName} />
+                                        {errors.monument_surname2 && touched.monument_surname2
+                                            && <div className="field-error">{errors.monument_surname2}</div>}
+                                    </div>
+                                </div>
+
+                                <div style={{ display: "flex", margin: "0 0 20px 0" }}>
+                                    <div style={{ width: "32%", margin: "0 2% 0 0" }}>
+                                        <span className="form-label">Дата рождения</span>
+                                        <Field className="form-field form-input" name="birth_date2" autoComplete="off"
+                                            placeholder="ДД.ММ.ГГГГ" validate={validateDate} />
+                                        {errors.birth_date2 && touched.birth_date2 && <div className="field-error">{errors.birth_date2}</div>}
+                                    </div>
+                                    <div style={{ width: "32%", margin: "0 2% 0 0" }}>
+                                        <span className="form-label">Дата смерти</span>
+                                        <Field className="form-field form-input" name="death_date2" autoComplete="off"
+                                            placeholder="ДД.ММ.ГГГГ" validate={validateDate} />
+                                        {errors.death_date2 && touched.death_date2 && <div className="field-error">{errors.death_date2}</div>}
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
 
                         <div style={{}}>
                             <span className="form-label">Комментарий к заказу</span>
                             <div className="input-group" >
                                 <Field className="form-field form-input" name="comment"
                                     component="textarea" rows="2"></Field>
-                            </div>
-                        </div>
-
-                        <div style={{ display: "flex", width: '100%', flexDirection: "column", alignItems: "center" }}>
-                            <div style={{
-                                display: "flex", width: '100%', justifyContent: "center",
-                                alignItems: "center", margin: '16px 0 8px 0', fontSize: "20px"
-                            }}>
-                                <h5 style={{ textAlign: 'center', margin: "0" }}>
-                                    Детали заказа №
-                                </h5>
-                                <div style={{ width: "65px", margin: "0 2% 0 0", display: "flex" }}>
-                                    <Field style={{ padding: "0px 2px", fontSize: "18px" }}
-                                        className="form-field form-input" name="order_number" autoComplete="off"
-                                        placeholder="000000" validate={validateOrderNumber} />
-                                </div>
-                            </div>
-                            {errors.order_number && touched.order_number && <div className="field-error">{errors.order_number}</div>}
-                        </div>
-
-                        <div style={{ margin: "8px 0", borderRadius: '4px', border: '1px solid #5c5c5c' }}>
-                            <span className="form-label">Выбранные позиции:</span>
-                            <div className="order-details">
-                                <ListOfProducts productList={productList} PRICES={PRICES} MakeName={MakeName} />
-                                {total !== 0 &&
-                                    <div className="total">
-                                        <span style={{ margin: "0 5px" }}>Итого, руб:</span> <span className="price">{total}</span>
-                                    </div>}
-                            </div>
-                            <div>
-                                {screenshot === 'noscreen'
-                                    ? <span className="form-label" style={{ color: "orange" }}>Снимок сцены не сделан!</span>
-                                    : <img className="order-photo" src={`${screenshot}`} alt="order-screenshot" />}
-
                             </div>
                         </div>
 

@@ -3,10 +3,10 @@ import { Container, ToggleButtonGroup } from 'react-bootstrap';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { CustomAccordion } from './CustomAccordion';
 
-const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel }) => {
+const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel, onAddModelToList, onChangeFIOcount }) => {
     return (
-        <ToggleButtonGroup vertical={true} name={`${setting}-toggle`}
-            type='radio' defaultValue={def} style={{height: '100%', display: 'flex'}}>
+        <ToggleButtonGroup vertical={true} name={`size-${setting}-toggle`}
+            type='radio' defaultValue={def} style={{ height: '100%', display: 'flex' }}>
             {list.map((radio, idx) => (
                 <ToggleButton
                     style={{ padding: "3px 6px", display: 'flex', alignItems: 'center', justifyContent: 'center' }}
@@ -21,7 +21,11 @@ const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel 
                     onChange={(e) => {
                         doSet(e.currentTarget.value)
                         onChangeModel('');
-                        // onAddModelToList(0, '', true);
+                        console.log(e.currentTarget.value)
+                        if (setting === '1' || setting === '2') {
+                            onChangeFIOcount(e.currentTarget.value)
+                        }
+                        onAddModelToList(0, '', true);
                     }}
                 >
                     {radio.name}
@@ -31,9 +35,9 @@ const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel 
     )
 }
 
-export default function FilterMST({ onChangeModel, onAddModelToList }) {
+export default function FilterMST({ onChangeModel, onAddModelToList, onChangeFIOcount }) {
     const [material, setMaterial] = useState('granite');
-    const [size, setSize] = useState('100');
+    const [size, setSize] = useState('1');
     const [type, setType] = useState('standard');
     const [activeKey, setActiveKey] = useState(null)
 
@@ -42,11 +46,8 @@ export default function FilterMST({ onChangeModel, onAddModelToList }) {
         { name: 'Мрамор', value: 'marble' },
     ];
     const sizes = [
-        { name: '100 см', value: '100' },
-        { name: '140 см', value: '140' },
-        { name: '180 см', value: '180' },
-        { name: '220 см', value: '220' },
-        { name: '240 см', value: '240' },
+        { name: 'Одиночные', value: '1' },
+        { name: 'Семейные', value: '2' },
     ];
     const types = [
         { name: 'Стандарт', value: 'standard' },
@@ -57,7 +58,7 @@ export default function FilterMST({ onChangeModel, onAddModelToList }) {
     return (
         <div className="scrollbar scrollbar-primary" >
 
-            <Container className='filter' style={{ padding: '0px 6px 10px' }}>
+            <Container className='filter' style={{ padding: '4px 6px 10px' }}>
                 <Container className='filter-button-group' style={{ padding: '0px 3px 0px 0px' }}>
                     <Container style={{ padding: '0' }} className='filter-button-group'>
                         <p style={{ margin: '0px 0px 4px 5px' }}>Материал</p>
@@ -68,20 +69,21 @@ export default function FilterMST({ onChangeModel, onAddModelToList }) {
                             onAddModelToList={onAddModelToList}
                         />
                     </Container>
-                    <Container style={{ padding: '0' }} className='filter-button-group'>
-                        <p style={{ margin: '0px 0px 4px 5px' }}>Тип</p>
-                        <FilterRadioButtons key={types} list={types}
-                            setting={type} doSet={setType}
-                            variant={'outline-warning'} def={type}
+                    <Container className='filter-button-group' style={{ padding: '0px 0px 0px 0px' }}>
+                        <p style={{ margin: '0px 0px 4px 5px' }}>Размер</p>
+                        <FilterRadioButtons key={sizes} list={sizes}
+                            setting={size} doSet={setSize}
+                            variant={'outline-info'} def={size}
                             onChangeModel={onChangeModel}
-                            onAddModelToList={onAddModelToList} />
+                            onAddModelToList={onAddModelToList}
+                            onChangeFIOcount={onChangeFIOcount} />
                     </Container>
                 </Container>
                 <Container className='filter-button-group' style={{ padding: '0px 0px 0px 3px' }}>
-                    <p style={{ margin: '0px 0px 4px 5px' }}>Ширина</p>
-                    <FilterRadioButtons key={sizes} list={sizes}
-                        setting={size} doSet={setSize}
-                        variant={'outline-primary'} def={size}
+                    <p style={{ margin: '0px 0px 4px 5px' }}>Тип</p>
+                    <FilterRadioButtons key={types} list={types}
+                        setting={type} doSet={setType}
+                        variant={'outline-warning'} def={type}
                         onChangeModel={onChangeModel}
                         onAddModelToList={onAddModelToList} />
                 </Container>

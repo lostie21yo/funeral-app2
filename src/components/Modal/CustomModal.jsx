@@ -2,7 +2,7 @@ import { Modal } from 'react-bootstrap';
 import { ClientForm } from './ClientForm';
 import PRICES from "../../assets/prices.json";
 
-export const CustomModal = ({ show, handleClose, productList, screenshot }) => {
+export const CustomModal = ({ show, handleClose, productList, screenshot, FIOcount }) => {
 
     function formatDate(date) {
 
@@ -32,7 +32,7 @@ export const CustomModal = ({ show, handleClose, productList, screenshot }) => {
     const MakeName = (product) => {
         let features = []
         if (/_(\d)+_/.test(product)) {
-            features.push(`ширина ${product.match(/_(\d+)+_/)[1]} см`);
+            features.push(`размер ${product.match(/_(\d+)+_/)[1]}`);
         }
         if (/\((\d+)/.test(product)) {
             features.push(`высота ${product.match(/\((\d+)/)[1]} см`);
@@ -65,8 +65,9 @@ export const CustomModal = ({ show, handleClose, productList, screenshot }) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <ClientForm productList={productList} key={show} total={total} date={date}
-                    PRICES={PRICES} handleClose={handleClose} MakeName={MakeName} screenshot={screenshot}/>
+                <ClientForm productList={productList} key={show} total={total} 
+                    date={date} PRICES={PRICES} handleClose={handleClose} 
+                    MakeName={MakeName} screenshot={screenshot} FIOcount={FIOcount}/>
             </Modal.Body>
         </Modal>
     );

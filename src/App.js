@@ -15,6 +15,11 @@ function App() {
   if (modelList[0] === undefined) { modelList[0] = 'models/1_Облицовка/Не выбрано.glb' }
   // if(modelList[1] === undefined) {modelList[1] = 'models/2_Надгробия/Не выбрано.glb'}
 
+  // Скриншот стейт
+  const [screenshot, setScreenshot] = useState('noscreen');
+  const makeScreenshot = (base64) => {
+    setScreenshot(base64)
+  }
 
   const addModelToList = (index, path, isMultiple = false) => {
     if (!isMultiple) {
@@ -30,13 +35,7 @@ function App() {
     setModelList(modelList);
     setScreenshot('noscreen')
   };
-
-  const [screenshot, setScreenshot] = useState('noscreen');
-  const makeScreenshot = (base64) => {
-    setScreenshot(base64)
-  }
-  // console.log(screenshot)
-
+  
   return (
     <>
       <Panel onChangeModel={handleChangeModel}
