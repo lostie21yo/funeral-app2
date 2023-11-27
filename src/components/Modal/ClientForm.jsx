@@ -231,8 +231,8 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
             },
         }
 
-        // pdfMake.createPdf(pdfdoc, null, null, pdfFonts.pdfMake.vfs).download(pdfName + '.pdf');
-        pdfMake.createPdf(pdfdoc, pdfFonts.pdfMake.vfs).open();
+        pdfMake.createPdf(pdfdoc, null, null, pdfFonts.pdfMake.vfs).download(pdfName + '.pdf');
+        // pdfMake.createPdf(pdfdoc, pdfFonts.pdfMake.vfs).open();
     }
 
     const addRow = () => {
