@@ -62,23 +62,24 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
 
     var initial = {
         order_date: date,
-        customer_secondname: "Кто",
-        customer_firstname: "Заказал",
-        customer_surname: "Могилку",
+        customer_secondname: "Заказчик",
+        customer_firstname: "Прекрасной",
+        customer_surname: "Могилы",
         // email: "",
         number: "+79998887766",
-        monument_secondname1: "Сомбади",
-        monument_firstname1: "Покинул",
+        monument_secondname1: "Первый",
+        monument_firstname1: "Покинувший",
         monument_surname1: "Мир",
         birth_date1: "0.0.0000",
         death_date1: "31.12.3000",
-        comment: "Печаль чо",
-        order_number: ""
+        comment: "Однажды и нас настигнет эта участь",
+        order_number: "666",
+        deadline: "12.05.2023"
     }
     if (FIOcount === "2") {
-        initial['monument_secondname2'] = "Неужели"
-        initial['monument_firstname2'] = "Еще"
-        initial['monument_surname2'] = "Второй"
+        initial['monument_secondname2'] = "Второй"
+        initial['monument_firstname2'] = "Покинувший"
+        initial['monument_surname2'] = "Планетку"
         initial['birth_date2'] = "14.11.2000"
         initial['death_date2'] = "14.10.2500"
     }
@@ -118,6 +119,18 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
         data.push(['', ''])
         data.push(['Комментарий', values['comment']])
 
+        const resultPrice = document.getElementById('result-price').value;
+        const prepayment = document.getElementById('prepayment').value;
+
+        // формирование списка продуктов и цен для PDF файла
+        var productListPDF = []
+        let rows = document.getElementById('input-rows')
+        rows.querySelectorAll('input').forEach(elem => [
+            (elem.type === "text") ? productListPDF.push([elem.value]) : '',
+            (elem.type === "number") ? productListPDF.at(-1).push(elem.value) : ''
+        ])
+        console.log(productListPDF)
+
         var pdfdoc = {
             info: {
                 title: pdfName,
@@ -127,7 +140,7 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
             },
             pageSize: 'A4',
             pageOrientation: 'portrait',
-            pageMargins: [40, 40, 40, 40],
+            pageMargins: [50, 40, 50, 40],
             fontSize: 10,
             header: { text: 'Ритуал журнал', alignment: 'center', margin: [0, 16, 0, 8] },
             content: [
@@ -145,7 +158,7 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                         widths: [150, 330],
                         body: data,
                     },
-                    layout: 'noBorders'
+                    layout: 'noBorders',
                 },
 
                 { text: 'Детали заказа', fontSize: 14, bold: true, margin: [20, 0, 0, 4] },
@@ -153,11 +166,8 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                     style: 'tableExample',
                     table: {
                         widths: [400, 80],
-                        body:
-                            productList.map(product => [
-                                `${MakeName(product)}`,
-                                Object.keys(PRICES).includes(product) ? PRICES[product] : 'N/A'
-                            ]),
+                        heights: 14,
+                        body: productListPDF.map(product => product),
                     },
                     layout: {
                         hLineWidth: function (i, node) {
@@ -175,8 +185,23 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                     }
                 },
                 {
-                    text: `Итоговая стоимость продукции: ${total} руб.`,
-                    fontSize: 12, margin: [0, 0, 0, 20], color: 'black'
+                    columns: [
+                        { width: 240, text: '' },
+                        {
+                            width: 'auto',
+                            style: 'tableExample',
+                            table: {
+                                widths: [150, 100],
+                                body: [
+                                    ['Итоговая стоимость:', `${resultPrice} руб`],
+                                    ['Предоплата:', `${prepayment} руб`],
+                                    ['Срок выполнения:', `${values['deadline']}`]
+                                ],
+                            },
+                            layout: 'noBorders',
+                            alignment: 'right'
+                        },
+                    ]
                 },
                 isScreenshoted
                     ? { image: screenshot, fit: [400, 300], alignment: 'center' }
@@ -206,8 +231,45 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
             },
         }
 
-        pdfMake.createPdf(pdfdoc, null, null, pdfFonts.pdfMake.vfs).download(pdfName + '.pdf');
-        // pdfMake.createPdf(pdfdoc, pdfFonts.pdfMake.vfs).open();
+        // pdfMake.createPdf(pdfdoc, null, null, pdfFonts.pdfMake.vfs).download(pdfName + '.pdf');
+        pdfMake.createPdf(pdfdoc, pdfFonts.pdfMake.vfs).open();
+    }
+
+    const addRow = () => {
+        let rows = document.getElementById('input-rows')
+        if(rows.childNodes.item(0).id === 'nothing-selected'){
+            rows.removeChild(document.getElementById('nothing-selected'))
+        }
+        let row = document.createElement('div');
+        row.className = "order-details-line"
+
+        let nameInput = document.createElement('input');
+        nameInput.type = "text"
+        nameInput.className = "form-input"
+        nameInput.style = "width: 83%; font-size: 16px"
+        // nameInput.required = true
+
+        let priceInput = document.createElement('input');
+        priceInput.className = "form-input price"
+        priceInput.type = "number"
+        // priceInput.required = true
+
+        row.appendChild(nameInput);
+        row.appendChild(priceInput);
+        rows.appendChild(row);
+
+        const resultPrice = document.getElementById('result-price');
+        const prepayment = document.getElementById('prepayment');
+        rows.addEventListener('input', e => {
+            total = 0;
+            rows.querySelectorAll('input.price').forEach(elem => {
+                if (elem.type === "number") total += +elem.value
+            })
+            resultPrice.value = `${total}`;
+            prepayment.value = `${0}`
+            initial['total'] = resultPrice.value
+            initial['prepayment'] = prepayment.value
+        })
     }
 
     return (
@@ -215,9 +277,9 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
             <Formik
                 initialValues={initial}
                 onSubmit={(values) => {
-                    // same shape as initial values
-                    // console.log(values);
-                    if (productList.length > 0) createPDF(values)
+                    let rows = document.getElementById('input-rows')
+                    // console.log(rows.querySelectorAll('input').length)
+                    if(rows.querySelectorAll('input').length > 0) createPDF(values)
                     else alert("Оформление заказа невозможно.\nНи одна позиция не была выбрана!")
                 }}
             >
@@ -241,24 +303,39 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                             {errors.order_number && touched.order_number && <div className="field-error">{errors.order_number}</div>}
                         </div>
 
-                        <div style={{ margin: "8px 0", borderRadius: '4px', border: '1px solid #5c5c5c' }}>
+                        <div style={{ margin: "8px 0", padding: "0 0 12px 0", borderRadius: '4px', border: '1px solid #5c5c5c' }}>
                             <div>
                                 {screenshot === 'noscreen'
-                                    ? <span className="form-label" style={{ color: "orange" }}>Снимок сцены не сделан!</span>
+                                    ? <span className="form-label" style={{ color: "orange" }}>Снимок сцены не сделан</span>
                                     : <img className="order-photo" src={`${screenshot}`} alt="order-screenshot" />}
                             </div>
                             <span className="form-label">Выбранные позиции:</span>
                             <div className="order-details">
-                                <ListOfProducts productList={productList} PRICES={PRICES} MakeName={MakeName} />
-                                {total !== 0 &&
-                                    <div>
-                                        <div className="total">
-                                            <span style={{ margin: "0 5px" }}>Итого, руб:</span> <span className="price">{total}</span>
-                                        </div>
-                                        <div className="total">
-                                            <span style={{ margin: "0 5px" }}>Предоплата, руб:</span> <span className="price">{total * 0.5}</span>
-                                        </div>
-                                    </div>}
+                                <div id="input-rows" className="input-rows">
+                                    <ListOfProducts productList={productList} PRICES={PRICES} MakeName={MakeName} />
+                                </div>
+                                <Button variant="success" id="add-input-btn" className="add-input-btn" onClick={addRow}>+</Button>
+                                {/* {total !== 0 && */}
+                                <div style={{ marginTop: "8px" }}>
+                                    <div className="total">
+                                        <span style={{ margin: "0 5px" }}>Итого, руб:</span>
+                                        <input className="form-input price" style={{ margin: "2px 4px" }} id="result-price" defaultValue={total} disabled></input>
+                                    </div>
+                                    <div className="total">
+                                        <span style={{ margin: "0 5px" }}>Предоплата, руб:</span>
+                                        <input className="form-input price" style={{ margin: "2px 4px" }} id="prepayment" defaultValue={0}></input>
+                                    </div>
+                                    <div className="total">
+                                        <span style={{ margin: "0 5px" }}>Срок выполнения:</span>
+                                        <Field className="form-input price" style={{ margin: "2px 4px" }} name="deadline" autoComplete="off"
+                                            placeholder="ДД.ММ.ГГГГ" validate={validateDate} />
+                                    </div>
+                                    {errors.deadline && touched.deadline &&
+                                        <div className="field-error" style={{ textAlign: "right", margin: "2px 4px" }}>
+                                            {errors.deadline}
+                                        </div>}
+                                </div>
+                                {/* } */}
                             </div>
                         </div>
 
@@ -268,7 +345,7 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                         <div className="field-line">
                             <div style={{ width: "32%" }}>
                                 <Field className="form-field form-input" autoComplete="off"
-                                    name="customer_secondname" placeholder="Фамилия" validate={validateName} autoFocus />
+                                    name="customer_secondname" placeholder="Фамилия" validate={validateName} />
                                 {errors.customer_secondname && touched.customer_secondname
                                     && <div className="field-error">{errors.customer_secondname}</div>}
                             </div>
@@ -287,7 +364,7 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                         </div>
 
                         <div className="field-line" style={{ margin: "0 0 20px 0" }}>
-                            <div style={{ width: "40%" }}>
+                            <div style={{ width: "32%" }}>
                                 <span className="form-label">Контактный телефон</span>
                                 <Field className="form-field form-input" name="number" autoComplete="off"
                                     placeholder="Телефон" validate={validateNumber} />

@@ -34,7 +34,6 @@ button {
   color: #fff;
   cursor: pointer;
   outline: none;
-  -webkit-appearance: none;
 }
 
 button:disabled {
@@ -70,9 +69,10 @@ button.outline {
 }
 
 .order-details-line {
-  padding: 0 5px;
+  padding: 2px;
   font-size: 14px;
-  border-bottom: 1px solid #5c5c5c;
+  /* border-bottom: 1px solid #5c5c5c; */
+  /* background-color: #242424; */
   display: flex;
   justify-content: space-between;
 }
@@ -87,13 +87,38 @@ button.outline {
 }
 
 .price {
-  color: #00bd1f;
-  margin: 0 5px;
+  margin: 0 0px;
+  font-size: 16px;
+  width: 15%;
 }
 
 .total {
-  margin-top: 5px;
-  padding: 5px;
+  margin-top: 0px;
   display: flex;
   justify-content: flex-end;
+}
+
+.input-rows {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 4px 21px 4px;
+  border: 1px solid #495057;
+  /* border-bottom: 1px solid #5c5c5c; */
+  border-radius: 0.5em;
+  /* background-color: #495057; */
+}
+
+.add-input-btn {
+  width: 37px;
+  height: 37px;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  top: -18px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

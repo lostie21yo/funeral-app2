@@ -34,12 +34,11 @@ const Screenshot = ({ makeScreenshot }) => {
   // const link = document.getElementById("make_order_btn")
 
   useControls({
-    Скриншот: button(() => {
+    Снимок: button(() => {
       // link.setAttribute('download', 'canvas.png')
       const link = document.createElement('a')
-      link.style.width = '5px'
       const base64 = gl.domElement.toDataURL('image/png').replace('image/png', 'image/octet-stream')
-      console.log('SS maded')
+      console.log('Screenshot is ready')
       makeScreenshot(base64)
       // link.setAttribute('href', gl.domElement.toDataURL('image/png').replace('image/png', 'image/octet-stream'))
       link.click()
