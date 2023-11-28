@@ -35,7 +35,7 @@ export const RadioButtons = ({ files, name, onChangeModel, classIndex, onAddMode
                     if (typeof replacement !== 'undefined') {
                         onChangeModel(path);
                         onAddModelToList(classIndex, path);
-                        console.log(path)
+                        // console.log(path)
                     }
                 }
                 }

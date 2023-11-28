@@ -29,7 +29,7 @@ fs.readdir(folder, (err, files) => {
           );
         });
       });
-      console.log(folder + file )
+      console.log(folder + file)
     }
   });
 });

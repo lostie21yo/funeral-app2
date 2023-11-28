@@ -73,17 +73,17 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
         birth_date1: "0.0.0000",
         death_date1: "31.12.3000",
         comment: "Однажды и нас настигнет эта участь",
-        order_number: "666",
+        order_number: "123456",
         deadline: "12.05.2023"
     }
     if (FIOcount === "2") {
-        initial['monument_secondname2'] = "Второй"
-        initial['monument_firstname2'] = "Покинувший"
-        initial['monument_surname2'] = "Планетку"
-        initial['birth_date2'] = "14.11.2000"
-        initial['death_date2'] = "14.10.2500"
+        initial['monument_secondname2'] = ""
+        initial['monument_firstname2'] = ""
+        initial['monument_surname2'] = ""
+        initial['birth_date2'] = ""
+        initial['death_date2'] = ""
     }
-    console.log(initial)
+    // console.log(initial)
 
     const createPDF = (values) => {
 
@@ -110,9 +110,10 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
             ['Дата смерти', values['death_date1']],
             ['', '']
         ]
-        if (FIOcount === "2") {
-            data.push(['ФИО на памятнике 2', values['monument_secondname2'] + ' '
-                + values['monument_firstname2'] + ' ' + values['monument_surname2']])
+        const fullname2 = values['monument_secondname2'] + ' '
+            + values['monument_firstname2'] + ' ' + values['monument_surname2']
+        if (FIOcount === "2" && fullname2 !== "  ") {
+            data.push(['ФИО на памятнике 2', fullname2])
             data.push(['Дата рождения', values['birth_date2']])
             data.push(['Дата смерти', values['death_date2']])
         }
@@ -129,7 +130,7 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
             (elem.type === "text") ? productListPDF.push([elem.value]) : '',
             (elem.type === "number") ? productListPDF.at(-1).push(elem.value) : ''
         ])
-        console.log(productListPDF)
+        // console.log(productListPDF)
 
         var pdfdoc = {
             info: {
@@ -209,7 +210,7 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
 
             ],
             function() {
-                console.log(screenshot)
+                // console.log(screenshot)
                 if (screenshot !== "noscreen") {
                     return {
                         image: screenshot,
@@ -237,7 +238,7 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
 
     const addRow = () => {
         let rows = document.getElementById('input-rows')
-        if(rows.childNodes.item(0).id === 'nothing-selected'){
+        if (rows.childNodes.item(0).id === 'nothing-selected') {
             rows.removeChild(document.getElementById('nothing-selected'))
         }
         let row = document.createElement('div');
@@ -279,7 +280,7 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                 onSubmit={(values) => {
                     let rows = document.getElementById('input-rows')
                     // console.log(rows.querySelectorAll('input').length)
-                    if(rows.querySelectorAll('input').length > 0) createPDF(values)
+                    if (rows.querySelectorAll('input').length > 0) createPDF(values)
                     else alert("Оформление заказа невозможно.\nНи одна позиция не была выбрана!")
                 }}
             >
@@ -378,7 +379,6 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                             </div> */}
                         </div>
 
-
                         <span className="form-label">ФИО на памятнике 1</span>
                         <div className="field-line">
                             <div style={{ width: "32%" }}>
@@ -418,23 +418,23 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
 
                         {FIOcount === '2' &&
                             <div>
-                                <span className="form-label">ФИО на памятнике 2</span>
+                                <span className="form-label">ФИО на памятнике 2 (необязательно)</span>
                                 <div className="field-line">
                                     <div style={{ width: "32%" }}>
                                         <Field className="form-field form-input" autoComplete="off"
-                                            name="monument_secondname2" placeholder="Фамилия" validate={validateName} />
+                                            name="monument_secondname2" placeholder="Фамилия" />
                                         {errors.monument_secondname2 && touched.monument_secondname2
                                             && <div className="field-error">{errors.monument_secondname2}</div>}
                                     </div>
                                     <div style={{ width: "32%" }}>
                                         <Field className="form-field form-input" autoComplete="off"
-                                            name="monument_firstname2" placeholder="Имя" validate={validateName} />
+                                            name="monument_firstname2" placeholder="Имя" />
                                         {errors.monument_firstname2 && touched.monument_firstname2
                                             && <div className="field-error">{errors.monument_firstname2}</div>}
                                     </div>
                                     <div style={{ width: "32%" }}>
                                         <Field className="form-field form-input" autoComplete="off"
-                                            name="monument_surname2" placeholder="Отчество" validate={validateName} />
+                                            name="monument_surname2" placeholder="Отчество" />
                                         {errors.monument_surname2 && touched.monument_surname2
                                             && <div className="field-error">{errors.monument_surname2}</div>}
                                     </div>
@@ -444,13 +444,13 @@ export const ClientForm = ({ productList, date, total, handleClose, PRICES, Make
                                     <div style={{ width: "32%", margin: "0 2% 0 0" }}>
                                         <span className="form-label">Дата рождения</span>
                                         <Field className="form-field form-input" name="birth_date2" autoComplete="off"
-                                            placeholder="ДД.ММ.ГГГГ" validate={validateDate} />
+                                            placeholder="ДД.ММ.ГГГГ" />
                                         {errors.birth_date2 && touched.birth_date2 && <div className="field-error">{errors.birth_date2}</div>}
                                     </div>
                                     <div style={{ width: "32%", margin: "0 2% 0 0" }}>
                                         <span className="form-label">Дата смерти</span>
                                         <Field className="form-field form-input" name="death_date2" autoComplete="off"
-                                            placeholder="ДД.ММ.ГГГГ" validate={validateDate} />
+                                            placeholder="ДД.ММ.ГГГГ" />
                                         {errors.death_date2 && touched.death_date2 && <div className="field-error">{errors.death_date2}</div>}
                                     </div>
                                 </div>

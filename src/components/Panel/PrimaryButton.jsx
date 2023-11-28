@@ -5,7 +5,6 @@ export const PrimaryButton = ({ name, eventKey }) => {
     const decoratedOnClick = useAccordionButton(eventKey, () =>
         null
     );
-    console.log(name)
     return (
 
         <div onClick={decoratedOnClick} className='btn-image-container'>

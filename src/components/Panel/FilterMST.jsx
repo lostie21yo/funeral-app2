@@ -21,11 +21,10 @@ const FilterRadioButtons = ({ list, setting, doSet, variant, def, onChangeModel,
                     onChange={(e) => {
                         doSet(e.currentTarget.value)
                         onChangeModel('');
-                        console.log(e.currentTarget.value)
                         if (setting === '1' || setting === '2') {
                             onChangeFIOcount(e.currentTarget.value)
                         }
-                        onAddModelToList(0, '', true);
+                        // onAddModelToList(0, '', true); # сброс при смене параметров фильтра
                     }}
                 >
                     {radio.name}
