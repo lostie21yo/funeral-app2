@@ -83,8 +83,10 @@ export const FilterCH = ({ files, name, onChangeModel, classIndex, onAddModelToL
     
     var defColor;
     colorSet.length > 0 ? defColor = colorSet[0]['name'] : defColor = 'black'
+    var defHeight;
+    heightSet.length > 0 ? defHeight = heightSet[0].value : defHeight = 100
     const [color, setColor] = useState(defColor)
-    const [height, setHeight] = useState(100)
+    const [height, setHeight] = useState(defHeight)
     
     var filtered_files = new Set()
     files.forEach(model => {
