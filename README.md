@@ -72,6 +72,8 @@ This is a client web application for displaying 3D models of various objects (in
    npm install
    npm start
    ```
+
+You can also open an already running application using [Vercel](https://funeral-app2.vercel.app/)
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 
@@ -85,10 +87,10 @@ This is a client web application for displaying 3D models of various objects (in
 5. You can save your order details by clicking "Подтвердить" and downloading a PDF file wherever you want
 
 <div align="center">
-    <img src="screen1.jpg" alt="interface" width='60%'>
+    <img src="screen1.jpg" alt="interface" width='100%'>
 </div>
 <div align="center">
-    <img src="screen2.jpg" alt="interface" width='60%'>
+    <img src="screen2.jpg" alt="interface" width='100%'>
 </div>
 
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
