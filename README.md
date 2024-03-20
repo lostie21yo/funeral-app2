@@ -99,12 +99,12 @@ You can also open an already running application using [Vercel](https://funeral-
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [Telegram](https://t.me/leoncox) - leon.coxsw@gmail.com
+Ilya K - [Telegram](https://t.me/leoncox) - leon.coxsw@gmail.com
 
 Project Link: [FuneralApp](https://github.com/lostie21yo/funeral-app2)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
+<div align="center">
 © 2023 GitHub, Inc.
-
+</div>
