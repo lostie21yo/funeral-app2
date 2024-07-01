@@ -73,7 +73,7 @@ This is a client web application for displaying 3D models of various objects (in
    npm start
    ```
 
-You can also open an already running application using [Vercel](https://funeral-app2.vercel.app/)
+You can also open an already running application using [Vercel](https://ritual-journal.vercel.app/)
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 
